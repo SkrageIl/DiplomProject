@@ -1,0 +1,263 @@
+{
+  "drinks": [
+    {
+      "name": "Coffee1",
+      "article": "C1",
+      "image": "imgDrinks1.jpg",
+      "price": 100,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee2",
+      "article": "C2",
+      "image": "imgDrinks2.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee3",
+      "article": "C3",
+      "image": "imgDrinks3.jpg",
+      "price": 130,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee4",
+      "article": "C4",
+      "image": "imgDrinks4.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee5",
+      "article": "C5",
+      "image": "imgDrinks5.jpg",
+      "price": 110,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee6",
+      "article": "C6",
+      "image": "imgDrinks6.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee7",
+      "article": "C7",
+      "image": "imgDrinks7.jpg",
+      "price": 130,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee8",
+      "article": "C8",
+      "image": "imgDrinks8.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee9",
+      "article": "C9",
+      "image": "imgDrinks9.jpg",
+      "price": 140,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Coffee10",
+      "article": "C10",
+      "image": "imgDrinks10.jpg",
+      "price": 130,
+      "quantity": 0,
+      "available": true
+    }
+  ],
+  "foods": [
+    {
+      "name": "Food1",
+      "article": "F1",
+      "image": "imgFoods1.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food2",
+      "article": "F2",
+      "image": "imgFoods2.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food3",
+      "article": "F3",
+      "image": "imgFoods3.jpg",
+      "price": 130,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food4",
+      "article": "F4",
+      "image": "imgFoods4.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food5",
+      "article": "F5",
+      "image": "imgFoods5.jpg",
+      "price": 110,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food6",
+      "article": "F6",
+      "image": "imgFoods6.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food7",
+      "article": "F7",
+      "image": "imgFoods7.jpg",
+      "price": 130,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food8",
+      "article": "F8",
+      "image": "imgFoods8.jpg",
+      "price": 120,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food9",
+      "article": "F9",
+      "image": "imgFoods9.jpg",
+      "price": 140,
+      "quantity": 0,
+      "available": true
+    },
+    {
+      "name": "Food10",
+      "article": "F10",
+      "image": "imgFoods10.jpg",
+      "price": 130,
+      "quantity": 0,
+      "available": true
+    }
+  ],
+  "orders": [
+    {
+      "id": 0,
+      "item": [
+        {
+          "name": "Food10",
+          "price": 130,
+          "quantity": 1
+        },
+        {
+          "name": "Food9",
+          "price": 140,
+          "quantity": 1
+        }
+      ],
+      "client": {
+        "name": "Илья",
+        "tel": "+79963868299"
+      },
+      "time": "11:15",
+      "address": "ул. Воронкова, 12",
+      "total": 270,
+      "status": "ready"
+    },
+    {
+      "total": 130,
+      "status": "prepare",
+      "time": "17:00",
+      "address": "ул. Калинина, 83",
+      "item": [
+        {
+          "name": "Food3",
+          "price": 130,
+          "quantity": 1
+        }
+      ],
+      "client": {
+        "name": "Ваня",
+        "tel": "+79999999999"
+      },
+      "id": 1
+    }
+  ],
+  "shops": [
+    {
+      "id": 0,
+      "address": "ул. Калинина, 83"
+    },
+    {
+      "id": 1,
+      "address": "ул. 50 лет Октября, 28"
+    },
+    {
+      "id": 2,
+      "address": "ул. Театральная, 128"
+    },
+    {
+      "id": 3,
+      "address": "ул. Воронкова, 12"
+    }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "name": "Админ",
+      "tel": "+79990000000",
+      "password": "000000",
+      "role": "admin",
+      "depart": "ул. Воронкова, 12",
+      "token": "SomeToken"
+    },
+    {
+      "id": 1,
+      "name": "Илья",
+      "tel": "+79963868290",
+      "password": "111111",
+      "role": "barista",
+      "depart": "ул. Воронкова, 12",
+      "token": "SomeToken1"
+    },
+    {
+      "name": "Ваня",
+      "tel": "+79999999999",
+      "password": "222222",
+      "role": "client",
+      "token": "clientToken",
+      "id": 2
+    },
+    {
+      "name": "Петр",
+      "tel": "+7(222)2222222",
+      "password": "555555",
+      "role": "client",
+      "token": "clientToken",
+      "id": 3
+    }
+  ]
+}
