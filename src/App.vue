@@ -1,5 +1,6 @@
 <template>
   <MainWrapper/>
+  <notifications width="250px" position="top center" max="3"/>
 </template>
 
 <script>
@@ -37,5 +38,6 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  overflow: hidden;
 }
 </style>

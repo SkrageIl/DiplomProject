@@ -88,11 +88,11 @@ export default {
       this.CHANGE_BARISTA_ORDER_STATUS(order)
     },
     nextStageStatusOrder(status){
-      if (status == "prepare") {
-        return "ready"
+      if (status == "Готовим") {
+        return "Готов"
       }
-      if (status == "ready") {
-        return "complete"
+      if (status == "Готов") {
+        return "Завершен"
       }
     },
     stopTimer () {

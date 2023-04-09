@@ -1,45 +1,72 @@
 <template> 
     <div class="main-wrapper">
         <CoffeeHeader/>
-        <router-view class="router-main-content"/>
+        <router-view/>
+        <vue-final-modal
+            v-model="isModal"
+            @click-outside="closeModal"
+            classes="modal-container"
+            content-class="modal-content">
+            <modal-login
+                ref="modalLogin"
+                @closeModal="closeModal">
+            </modal-login>
+        </vue-final-modal>
         <CoffeeFooter/>
         <CoffeeBottomNav
-        v-if:="mobile"/>
+        v-if:="this.$isMobile()"/>
     </div>
 </template>
 
 <script>
-import CoffeeHeader from './CoffeeHeader.vue';
-import CoffeeFooter from './CoffeeFooter.vue';
-import CoffeeBottomNav from './CoffeeBottomNav.vue';
+import {mapState,mapActions} from 'vuex'
+import ModalLogin from './loginModal/ModalLogin.vue'
+import CoffeeHeader from './CoffeeHeader.vue'
+import CoffeeFooter from './CoffeeFooter.vue'
+import CoffeeBottomNav from './CoffeeBottomNav.vue'
 
 export default {
     name: 'MainWrapper',
     components:{
         CoffeeHeader,
         CoffeeFooter,
-        CoffeeBottomNav
+        CoffeeBottomNav,
+        ModalLogin
     },
-    data() {
-        return {
-            mobile: true
-        };
-    },
-    created() {
-        window.addEventListener('resize', this.onResize);
-        this.onResize();
-    },
-    unmounted() {
-        window.removeEventListener('resize', this.onResize)
+    computed: {
+        ...mapState([
+            'isModal'
+        ])
     },
     methods: {
-        onResize() {
-            this.mobile = window.innerWidth <= 767;
+        ...mapActions([
+            'CLOSE_MODAL'
+        ]),
+        closeModal(){
+            this.CLOSE_MODAL()
+            setTimeout(this.$refs.modalLogin.backToLogin,500)
         }
     }
 }
 </script>
 
 <style>
-
+.main-wrapper {
+    margin-bottom: 100px;
+}
+.modal-container {
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+  }
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+  }
 </style>

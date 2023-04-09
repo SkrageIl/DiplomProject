@@ -139,19 +139,21 @@ export default {
     top: 10px;
     left: 10px;
     font-size: 20px;
-    color: #ee7f00;
+    color: #cccccc;
     background-color: transparent;
     border: none;
     cursor: pointer;
   }
   .close-popup-btn{
     position: absolute;
-    top: 10px;
+    top: 8px;
     right: 10px;
-    font-size: 20px;
-    color: #ee7f00;
-    background-color: transparent;
+    font-size: 15px;
+    padding: 5px 7px;
+    color: #ffffff;
+    background-color: #cccccc;
     border: none;
+    border-radius: 25px;
     cursor: pointer;
   }
 }
@@ -203,7 +205,7 @@ export default {
       margin-top: 15px;
       padding: 5px;
       color: #fff;
-      background: rgb(252, 121, 14);
+      background: #3a3939;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
       border: none;
       border-radius: 12px;

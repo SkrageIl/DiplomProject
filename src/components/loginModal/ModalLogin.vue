@@ -27,13 +27,14 @@ export default {
     };
   },
   methods: {
-    closeModal(){
+    backToLogin(){
       this.isRegistry = false
+    },
+    closeModal(){
       this.$emit("closeModal")
     }
   }
 };
 </script>
 
-<style>
-</style>
+<style></style>

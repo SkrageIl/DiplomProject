@@ -31,7 +31,7 @@
 <script>
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength} from '@vuelidate/validators'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: "LoginForm",
@@ -56,6 +56,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters([
+      'isLoggedIn'
+    ])
+  },
   methods: {
     ...mapActions([
       'login'
@@ -67,7 +72,15 @@ export default {
       .then(() => {
         this.closeModal()
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err + password))
+      setTimeout(() => {
+        if (!this.isLoggedIn){
+          this.$notify({
+            title: "Неправильно ввели номер телефона или пароль",
+            type: "error"
+          });
+        }
+      }, 100)
     },
     closeModal(){
       this.$emit("closeModal")
@@ -81,7 +94,6 @@ export default {
 
 <style lang="scss" scoped>
 .login-form{
-  
   border-radius: 25px;
   position: absolute;
   top: 50%;
@@ -100,12 +112,14 @@ export default {
   }
   .close-popup-btn{
     position: absolute;
-    top: 10px;
+    top: 8px;
     right: 10px;
-    font-size: 20px;
-    color: #ee7f00;
-    background-color: transparent;
+    font-size: 15px;
+    padding: 5px 7px;
+    color: #ffffff;
+    background-color: #cccccc;
     border: none;
+    border-radius: 25px;
     cursor: pointer;
   }
 }
@@ -143,22 +157,23 @@ export default {
     border-bottom-width: 2px;
   }
   .button-submit{
+    text-align: center;
     button{
       margin-top: 15px;
       padding: 5px;
       color: #fff;
-      background: #fc790e;
+      background: #3a3939;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
       border: none;
       border-radius: 12px;
-      width: 100%;
+      width: 40%;
     }
     button:hover{
       transform: scale(1.05);
       filter: brightness(1.2);
     }
     button:disabled{
-      background: #fc790e78;
+      background: #3a393984;
       cursor: none;
       pointer-events: none;
     }
@@ -169,7 +184,7 @@ export default {
       margin-top: 15px;
       padding: 5px;
       color: #fff;
-      background: #fc790e;
+      background: #3a3939;
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
       border: none;
       border-radius: 12px;

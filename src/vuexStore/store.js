@@ -278,7 +278,7 @@ let store = createStore({
             client.tel = getters.USER.tel
 
             order.total = getters.CART_TOTAL
-            order.status = "prepare"
+            order.status = "Готовим"
             order.time = feature.time
             order.address = feature.address
             order.item = items

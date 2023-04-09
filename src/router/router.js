@@ -8,6 +8,18 @@ import { createRouter, createWebHistory } from 'vue-router'
 import store from '../vuexStore/store'
 
 const router = createRouter({
+    scrollBehavior: function(to) {
+        if (to.hash) {
+            return {
+                el: to.hash,
+                top: 100,
+                behavior: 'smooth'
+            }
+        }
+        // } else {
+        //     return { x: 0, y: 0 }
+        // }
+    },
     routes: [{
             path: '/',
             name: 'catalog',
