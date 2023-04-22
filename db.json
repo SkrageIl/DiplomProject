@@ -213,55 +213,329 @@
             "item": [{
                     "name": "Food10",
                     "price": 130,
-                    "quantity": 1
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
                 },
                 {
                     "name": "Food9",
                     "price": 140,
-                    "quantity": 1
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Food9",
+                    "price": 140,
+                    "quantity": 1,
+                    "size": 0.2,
+                    "img": "@/assets/Coffee.png"
                 }
             ],
             "client": {
-                "name": "Илья",
-                "tel": "+79963868299"
+                "name": "Ваня",
+                "tel": "+79999999999"
             },
-            "time": "11:15",
+            "time": "22-04-2023 11:15",
             "address": "ул. Воронкова, 12",
             "total": 270,
-            "status": "Готовим"
+            "status": "Готов"
         },
         {
             "total": 130,
             "status": "Готовим",
-            "time": "17:00",
-            "address": "ул. Калинина, 83",
+            "time": "22-04-2023 17:00",
+            "address": "ул. Воронкова, 12",
             "item": [{
                 "name": "Food3",
                 "price": 130,
-                "quantity": 1
+                "quantity": 1,
+                "size": 0.2,
+                "img": "@/assets/Coffee.png"
             }],
             "client": {
                 "name": "Ваня",
                 "tel": "+79999999999"
             },
             "id": 1
+        },
+        {
+            "total": 130,
+            "status": "Завершен",
+            "time": "11-04-2023 17:00",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                "name": "Food3",
+                "price": 130,
+                "quantity": 1,
+                "size": 0.2,
+                "img": "@/assets/Coffee.png"
+            }],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 2
+        },
+        {
+            "total": 130,
+            "status": "Завершен",
+            "time": "22-04-2023 17:00",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                "name": "Food3",
+                "price": 130,
+                "quantity": 1,
+                "size": 0.3,
+                "img": "@/assets/Coffee.png"
+            }],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 3
+        },
+        {
+            "total": 400,
+            "status": "Завершен",
+            "time": "10-04-2023 17:55",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Капучино",
+                    "price": 120,
+                    "quantity": 1,
+                    "size": 0.4,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Кукис",
+                    "price": 80,
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Тост с тунцом",
+                    "price": 200,
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 4
+        },
+        {
+            "total": 400,
+            "status": "Завершен",
+            "time": "10-04-2023 10:55",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Капучино",
+                    "price": 120,
+                    "quantity": 1,
+                    "size": 0.4,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Кукис",
+                    "price": 80,
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Тост с тунцом",
+                    "price": 200,
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 5
+        },
+        {
+            "total": 400,
+            "status": "Завершен",
+            "time": "10-04-2023 15:55",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Капучино",
+                    "price": 120,
+                    "quantity": 1,
+                    "size": 0.4,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Кукис",
+                    "price": 80,
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                },
+                {
+                    "name": "Тост с тунцом",
+                    "price": 200,
+                    "quantity": 1,
+                    "img": "@/assets/Coffee.png"
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 6
+        },
+        {
+            "total": 240,
+            "status": "Готовим",
+            "time": "22-04-202318:55",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Капучино",
+                    "price": 120,
+                    "quantity": 1,
+                    "size": 0.4
+                },
+                {
+                    "name": "Латте",
+                    "price": 120,
+                    "quantity": 1,
+                    "size": 0.2
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 7
+        },
+        {
+            "total": 500,
+            "status": "Готовим",
+            "time": "22-04-202319:10",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Буритто с курицей",
+                    "price": 160,
+                    "quantity": 1,
+                    "size": 0
+                },
+                {
+                    "name": "Сэндвич с ветчиной",
+                    "price": 140,
+                    "quantity": 1,
+                    "size": 0
+                },
+                {
+                    "name": "Тост с тунцом",
+                    "price": 200,
+                    "quantity": 1,
+                    "size": 0
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 8
+        },
+        {
+            "total": 1240,
+            "status": "Готовим",
+            "time": "22-04-202318:10",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Американо",
+                    "price": 110,
+                    "quantity": 1,
+                    "size": 0.4
+                },
+                {
+                    "name": "Эспрессо",
+                    "price": 100,
+                    "quantity": 1,
+                    "size": 0.3
+                },
+                {
+                    "name": "Тарталетка с ягодами",
+                    "price": 180,
+                    "quantity": 1,
+                    "size": 0
+                },
+                {
+                    "name": "Фисташковое гурме",
+                    "price": 200,
+                    "quantity": 2,
+                    "size": 0
+                },
+                {
+                    "name": "Брауни",
+                    "price": 150,
+                    "quantity": 3,
+                    "size": 0
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 9
+        },
+        {
+            "total": 620,
+            "status": "Готовим",
+            "time": "22-04-202319:10",
+            "address": "ул. Воронкова, 12",
+            "item": [{
+                    "name": "Эрл Грей",
+                    "price": 120,
+                    "quantity": 2,
+                    "size": 0.4
+                },
+                {
+                    "name": "Тарталетка с ягодами",
+                    "price": 180,
+                    "quantity": 1,
+                    "size": 0
+                },
+                {
+                    "name": "Фисташковое гурме",
+                    "price": 200,
+                    "quantity": 1,
+                    "size": 0
+                }
+            ],
+            "client": {
+                "name": "Ваня",
+                "tel": "+79999999999"
+            },
+            "id": 10
         }
     ],
     "shops": [{
             "id": 0,
-            "address": "ул. Калинина, 83"
+            "address": "ул. Калинина, 83",
+            "time": "9:00 - 20:00",
+            "phone": "+7(999)-999-99-99"
         },
         {
             "id": 1,
-            "address": "ул. 50 лет Октября, 28"
+            "address": "ул. 50 лет Октября, 28",
+            "time": "9:00 - 20:00",
+            "phone": "+7(999)-999-99-99"
         },
         {
             "id": 2,
-            "address": "ул. Театральная, 128"
+            "address": "ул. Театральная, 128",
+            "time": "9:00 - 20:00",
+            "phone": "+7(999)-999-99-99"
         },
         {
             "id": 3,
-            "address": "ул. Воронкова, 12"
+            "address": "ул. Воронкова, 12",
+            "time": "9:00 - 20:00",
+            "phone": "+7(999)-999-99-99"
         }
     ],
     "users": [{

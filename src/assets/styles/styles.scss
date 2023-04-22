@@ -102,7 +102,7 @@
     right: 0;
     padding: 8px;
     background: #ffffff;
-    min-height: 50px;
+    max-height: 4em;
     padding-left: 50px;
     padding-right: 50px;
     .material-icons {
@@ -113,8 +113,7 @@
 
 .modal-content {
     border-radius: 25px;
-    max-width: 250px;
+    max-width: 16em;
     border: 0;
-    background-color: #FFB21C;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }

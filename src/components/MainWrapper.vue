@@ -12,7 +12,6 @@
                 @closeModal="closeModal">
             </modal-login>
         </vue-final-modal>
-        <CoffeeFooter/>
         <CoffeeBottomNav
         v-if:="this.$isMobile()"/>
     </div>
@@ -22,14 +21,12 @@
 import {mapState,mapActions} from 'vuex'
 import ModalLogin from './loginModal/ModalLogin.vue'
 import CoffeeHeader from './CoffeeHeader.vue'
-import CoffeeFooter from './CoffeeFooter.vue'
 import CoffeeBottomNav from './CoffeeBottomNav.vue'
 
 export default {
     name: 'MainWrapper',
     components:{
         CoffeeHeader,
-        CoffeeFooter,
         CoffeeBottomNav,
         ModalLogin
     },
@@ -52,7 +49,7 @@ export default {
 
 <style>
 .main-wrapper {
-    margin-bottom: 100px;
+    margin-bottom: 5em;
 }
 .modal-container {
     color: #000;

@@ -1,0 +1,45 @@
+<template>
+  <div class="shops">
+    <ShopItem
+      v-for="shopItem in SHOPS" 
+        :key="shopItem.id"
+        :shopItem_data="shopItem"/>
+  </div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import ShopItem from './ShopItem.vue';
+export default {
+  name: "ShopsInfo",
+  components:{
+    ShopItem
+  },
+  mounted() {
+    this.GET_SHOPS_FROM_DB()
+  },
+  data() {
+    return {};
+  },
+  props: {},
+  computed:{
+    ...mapGetters([
+      'SHOPS'
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'GET_SHOPS_FROM_DB',
+    ]),
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@media(min-width: 576px){
+  .shops{
+    justify-items: center;
+    display: grid;
+  }
+}
+</style>

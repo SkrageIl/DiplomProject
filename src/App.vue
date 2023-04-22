@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import MainWrapper from './components/MainWrapper.vue';
+import MainWrapper from './components/MainWrapper.vue'
 
 export default {
   name: 'App',
@@ -21,7 +21,7 @@ export default {
         this.$router.push('/')
       })
     }
-  },
+  }
 }
 </script>
 

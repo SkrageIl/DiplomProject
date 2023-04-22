@@ -1,7 +1,11 @@
 <template>
   <div class="cart">
-    <h2 class="cart__label">Ваш заказ</h2>
-    <p v-if="CART.length == 0">Ваша корзина пуста</p>
+    <div class="cart__empty" v-if="CART.length == 0">
+      <img class="cart__empty-img" src="@/assets/emptyCart.png" alt="">
+      <p class="cart__empty-label">Ваша корзина пуста</p>
+      <button class="cart__empty-btn" @click="this.$router.push('/')">В каталог</button>
+    </div>
+    <h2 v-else class="cart__label">Ваш заказ</h2>
     <div class="cart-items">
       <CartItem
         v-for="(item, index) in CART"
@@ -77,11 +81,11 @@ export default {
     deleteFromCart(index) {
       this.DELETE_FROM_CART(index)
     },
-    subtractQuantity(article) {
-      this.SUBTRACT_QUANTITY(article)
+    subtractQuantity(cart_item) {
+      this.SUBTRACT_QUANTITY(cart_item)
     },
-    addQuantity(article) {
-      this.ADD_QUANTITY(article)
+    addQuantity(cart_item) {
+      this.ADD_QUANTITY(cart_item)
     },
     confirmOrder(){
       if (this.isLoggedIn) {
@@ -97,6 +101,25 @@ export default {
 <style lang="scss" scoped>
 .cart{
   margin-top: 8em;
+  &__empty-img{
+    width: 100%;
+    max-width: 20em;
+  }
+  &__empty-label{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    font-weight: 600;
+  }
+  &__empty-btn{
+    font-family: 'Montserrat', sans-serif;
+    border: 0;
+    background-color: #ff9000;
+    border-radius: 22px;
+    width: 10em;
+    height: 3em;
+    font-size: 1.25em;
+    color: #ffffff;
+  }
   &__label{
     margin: 5%;
   }

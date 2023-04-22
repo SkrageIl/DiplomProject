@@ -1,7 +1,7 @@
 <template>
   <div class="catalog-item">
     <div class="catalog-item__top-content" :class="classes" @click="openModal()">
-    <img class="item__image" src="@/assets/Coffee.png" alt="img" />
+    <img class="item__image" src="@/assets/glyase.png" alt="img" />
     </div>
     <h3 class="item__name">{{ product_data.name }}</h3>
     <div class="catalog-item__bot-content">
@@ -30,8 +30,8 @@
     :drag="true"
     classes="modal-container"
     content-class="modal-content modal-item">
-      <div class="catalog-item__top-content modal-top-content">
-        <img class="item__image modal-item__img swipe_item_img" src="@/assets/Coffee.png" alt="img"/>
+      <div class="catalog-item__top-content modal-top-content" :class="classes">
+        <img class="item__image modal-item__img swipe_item_img" src="@/assets/glyase.png" alt="img"/>
         <div class="top-content__sizes" v-if="!product_data.article.indexOf('C')">
           <button class="item__size" :class="{selected: size == 0.2}" @click="selectSize(0.2)">0.2л</button>
           <button class="item__size" :class="{selected: size == 0.3}" @click="selectSize(0.3)">0.3л</button>
@@ -61,7 +61,7 @@
     >
     <div class="swipe-modal" :class="classes">
       <div class="catalog-item__top-content modal-top-content">
-        <img class="item__image modal-item__img" src="@/assets/Coffee.png" alt="img"/>
+        <img class="item__image modal-item__img" src="@/assets/glyase.png" alt="img"/>
         <div class="top-content__sizes" v-if="!product_data.article.indexOf('C')">
           <button class="item__size swipe-modal__size" :class="{selected: size == 0.2}" @click="selectSize(0.2)">0.2л</button>
           <button class="item__size swipe-modal__size" :class="{selected: size == 0.3}" @click="selectSize(0.3)">0.3л</button>
@@ -125,7 +125,11 @@ export default {
       "FIND_CART_ITEM_QUANTITY_BY_ARTICLE"
     ]),
     quantityInfo: function(){
-      return this.FIND_CART_ITEM_QUANTITY_BY_ARTICLE(this.product_data.article)
+      let product = {
+        article: this.product_data.article,
+        size: this.size
+      }
+      return this.FIND_CART_ITEM_QUANTITY_BY_ARTICLE(product)
     }
   },
   methods: {
@@ -136,16 +140,27 @@ export default {
       'DELETE_FROM_CART'
     ]),
     addToCart() {
-      let product = this.product_data
-      product.size = this.size
+      let product = {
+        product_data: this.product_data,
+        size: this.size,
+        quantity: this.quantityInfo
+      }
       console.log(product + "        " + product.size)
       this.ADD_TO_CART(product)
     },
     subtractQuantity() {
-        this.SUBTRACT_QUANTITY(this.product_data.article)
+      let product = {
+        article: this.product_data.article,
+        size: this.size
+      }
+        this.SUBTRACT_QUANTITY(product)
     },
     addQuantity() {
-      this.ADD_QUANTITY(this.product_data.article)
+      let product = {
+        article: this.product_data.article,
+        size: this.size
+      }
+      this.ADD_QUANTITY(product)
     },
     openModal(){
       if(this.$isMobile()){
@@ -158,14 +173,17 @@ export default {
             this.isItemModal = false
     },
     selectSize(selectedSize){
-      if (this.size == selectedSize) {
+      let product = {
+        article: this.product_data.article,
+        size: this.size
+      }
+      if (product.size == selectedSize) {
+        let quantity = this.FIND_CART_ITEM_QUANTITY_BY_ARTICLE(product)
         this.size = 0
-        let quantity = this.product_data.quantity
+        console.log("Совпадает" + product)
         for (let index = 0; index < quantity; index++) {
-          console.log(index)
-          this.SUBTRACT_QUANTITY(this.product_data.article)          
+          this.SUBTRACT_QUANTITY(product)          
         }
-        this.DELETE_FROM_CART(this.product_data)
       } else {
         this.size = selectedSize
       }
@@ -333,6 +351,7 @@ export default {
 }
 .modal-top-content{
   padding-bottom: 1.15rem;
+  margin-bottom: 2em;
 }
 .modal-bot-content{
   padding: 1rem 1.10rem;

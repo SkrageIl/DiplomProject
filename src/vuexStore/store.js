@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+import moment from 'moment'
 
 let store = createStore({
     state: {
@@ -12,7 +13,6 @@ let store = createStore({
         user: JSON.parse(localStorage.getItem('user')) || {},
         shops: [],
         order: {},
-        baristaOrders: [],
         userOrders: [],
     },
     mutations: {
@@ -32,9 +32,6 @@ let store = createStore({
             state.token = ''
             state.user = {}
         },
-        ADD_ORDER_FOR_BARISTA: (state, baristaOrders) => {
-            state.baristaOrders = baristaOrders
-        },
         ADD_ORDER_FOR_USER: (state, userOrders) => {
             state.userOrders = userOrders
         },
@@ -48,40 +45,43 @@ let store = createStore({
             state.foods = foods;
         },
         SET_TO_CART: (state, product) => {
-            product.quantity++;
+            let itemProduct = Object.assign({}, product.product_data)
+            itemProduct.size = product.size
+            itemProduct.quantity = 1
             if (state.cart.length) {
-                let isProductExists = false;
+                let isProductExists = false
                 state.cart.forEach(function(item) {
-                    if (item.article === product.article) {
+                    if (item.article === product.product_data.article && item.size === product.size) {
                         isProductExists = true;
                         item.quantity++
                     }
                 })
                 if (!isProductExists) {
-                    state.cart.push(product);
+                    state.cart.push(itemProduct)
                 }
             } else {
-                state.cart.push(product);
+                state.cart.push(itemProduct)
             }
         },
-        REMOVE_FROM_CART: (state, index) => {
+        REMOVE_FROM_CART: (state, product) => {
             state.cart.forEach(function(item) {
-                if (state.cart.indexOf(item) === index) {
+                if (state.cart.indexOf(item) == product.article && item.size == product.size) {
                     item.quantity = 0;
                 }
             })
-            state.cart.splice(index, 1)
+            state.cart.splice(product.article, 1)
         },
-        ADD_QUANTITY_CART_ITEM: (state, article) => {
+        ADD_QUANTITY_CART_ITEM: (state, product) => {
             state.cart.forEach(function(item) {
-                if (item.article === article) {
+                if (item.article == product.article && item.size == product.size) {
+                    console.log(item.article + " артикль слева айтем справа продукт " + product.article + "  s  " + item.size + "  " + product.size)
                     item.quantity++
                 }
             })
         },
-        SUBTRACT_QUANTITY_CART_ITEM: (state, article) => {
+        SUBTRACT_QUANTITY_CART_ITEM: (state, product) => {
             state.cart.forEach(function(item) {
-                if (item.article === article) {
+                if (item.article === product.article && item.size == product.size) {
                     item.quantity--
                         if (item.quantity < 1) {
                             state.cart.splice(state.cart.indexOf(item), 1)
@@ -97,21 +97,12 @@ let store = createStore({
         },
         SET_ORDER_TO_STATE(state, order) {
             state.order = order
-            console.log(order)
-            console.log(state.order)
         },
         CLEAR_CART(state) {
             state.cart = []
         },
         CLEAR_ORDER(state) {
             state.order = {}
-        },
-        COMPLETE_ORDER(state, order) {
-            state.baristaOrders.forEach(function(item) {
-                if (item.id === order.id) {
-                    item.status = order.status
-                }
-            })
         },
         OPEN_MODAL(state) {
             state.isModal = true
@@ -181,23 +172,6 @@ let store = createStore({
                 }
             })
         },
-        GET_BARISTA_ORDERS_FROM_DB({ commit, getters }) {
-            return axios('http://localhost:3000/orders', {
-                    method: "GET"
-                })
-                .then((orders) => {
-                    var baristaOrders = []
-                    orders.data.forEach(function(item) {
-                        if (item.address == getters.USER.depart) {
-                            baristaOrders.push(item)
-                        }
-                    })
-                    commit('ADD_ORDER_FOR_BARISTA', baristaOrders)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        },
         GET_USER_ORDERS_FROM_DB({ commit, getters }) {
             return axios('http://localhost:3000/orders', {
                     method: "GET"
@@ -254,11 +228,11 @@ let store = createStore({
         DELETE_FROM_CART({ commit }, product) {
             commit('REMOVE_FROM_CART', product)
         },
-        ADD_QUANTITY({ commit }, article) {
-            commit('ADD_QUANTITY_CART_ITEM', article)
+        ADD_QUANTITY({ commit }, product) {
+            commit('ADD_QUANTITY_CART_ITEM', product)
         },
-        SUBTRACT_QUANTITY({ commit }, article) {
-            commit('SUBTRACT_QUANTITY_CART_ITEM', article)
+        SUBTRACT_QUANTITY({ commit }, product) {
+            commit('SUBTRACT_QUANTITY_CART_ITEM', product)
         },
         SET_ORDER({ commit, getters }, feature) {
             let order = {}
@@ -270,6 +244,8 @@ let store = createStore({
                 orderItem.name = item.name
                 orderItem.price = item.price
                 orderItem.quantity = item.quantity
+                orderItem.size = item.size
+                orderItem.img = item.img
                 items.push(orderItem)
             })
 
@@ -279,7 +255,7 @@ let store = createStore({
 
             order.total = getters.CART_TOTAL
             order.status = "Готовим"
-            order.time = feature.time
+            order.time = moment().format('DD-MM-YYYY') + feature.time
             order.address = feature.address
             order.item = items
             order.client = client
@@ -300,26 +276,6 @@ let store = createStore({
                 console.log(error)
             })
         },
-        CHANGE_BARISTA_ORDER_STATUS({ commit }, order) {
-            console.log(order.status)
-            console.log(order.id)
-            return new Promise((resolve, reject) => {
-                axios('http://localhost:3000/orders/' + order.id, {
-                        data: {
-                            "status": order.status
-                        },
-                        method: 'PATCH'
-                    })
-                    .then(() => {
-                        commit('COMPLETE_ORDER', order)
-                        resolve()
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        reject(err)
-                    })
-            })
-        },
         OPEN_MODAL({ commit }) {
             commit('OPEN_MODAL')
         },
@@ -330,9 +286,6 @@ let store = createStore({
     getters: {
         ORDER(state) {
             return state.order
-        },
-        BARISTA_ORDERS(state) {
-            return state.baristaOrders
         },
         USER_ORDERS(state) {
             return state.userOrders
@@ -369,10 +322,10 @@ let store = createStore({
         FIND_CART_ITEM_BY_ARTICLE: state => article => {
             return state.cart.find(item => item.article === article)
         },
-        FIND_CART_ITEM_QUANTITY_BY_ARTICLE: state => article => {
+        FIND_CART_ITEM_QUANTITY_BY_ARTICLE: state => product => {
             let quantity = 0;
             state.cart.forEach(function(item) {
-                if (item.article === article) {
+                if (item.article === product.article && item.size == product.size) {
                     quantity = item.quantity
                 }
             })
@@ -380,13 +333,7 @@ let store = createStore({
         },
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
-        isBarista: state => {
-            if (state.user.role == "barista") {
-                return true
-            }
-        },
-        //isModal: state => state.isModal
-    },
+    }
 })
 
 export default store;

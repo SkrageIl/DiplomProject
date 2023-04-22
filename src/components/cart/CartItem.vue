@@ -2,7 +2,7 @@
   <div class="cart-item">
     <div class="cart-item__left">
       <span class="cart-item__img-content" :class="classes">
-        <img src="@/assets/Coffee.png" class="cart-item__img">
+        <img src="@/assets/glyase.png" class="cart-item__img">
       </span>
       <div class="cart-item__center">
         <span class="cart-item__name">{{ cart_item_data.name }}</span>
@@ -41,10 +41,10 @@ export default {
   },
   methods: {
     subtractQuantity(){
-      this.$emit('subtractQuantity', this.cart_item_data.article)
+      this.$emit('subtractQuantity', this.cart_item_data)
     },
     addQuantity(){
-      this.$emit('addQuantity', this.cart_item_data.article)
+      this.$emit('addQuantity', this.cart_item_data)
     }
   }
 }

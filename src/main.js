@@ -9,6 +9,7 @@ import { vfmPlugin } from 'vue-final-modal'
 import Vue3MobileDetection from "vue3-mobile-detection"
 import Notifications from '@kyvg/vue3-notification'
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+import easySpinner from 'vue-easy-spinner'
 
 const app = createApp(App)
 app.use(store)
@@ -18,6 +19,9 @@ app.use(vfmPlugin)
 app.use(Vue3MobileDetection)
 app.use(Notifications)
 app.use(autoAnimatePlugin)
+app.use(easySpinner, {
+    prefix: 'easy',
+})
 app.mount('#app')
 
 app.config.globalProperties.$http = axios
