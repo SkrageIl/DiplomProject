@@ -164,6 +164,7 @@ let store = createStore({
                     localStorage.removeItem('token')
                     localStorage.removeItem('user')
                     delete axios.defaults.headers.common['Authorization']
+                    this.$router.push('/')
                     resolve()
                 } catch (err) {
                     commit('auth_error', err)
@@ -255,7 +256,7 @@ let store = createStore({
 
             order.total = getters.CART_TOTAL
             order.status = "Готовим"
-            order.time = moment().format('DD-MM-YYYY') + feature.time
+            order.time = moment().format('DD-MM-YYYY') + " " + feature.time
             order.address = feature.address
             order.item = items
             order.client = client

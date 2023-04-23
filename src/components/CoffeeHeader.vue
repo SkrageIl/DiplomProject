@@ -76,6 +76,7 @@ export default {
 }
 .header{
   position: fixed;
+  left: 0;
   width: 100%;
   height: 5em;
   margin-top: 0;
