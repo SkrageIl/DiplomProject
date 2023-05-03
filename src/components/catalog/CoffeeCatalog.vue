@@ -1,14 +1,17 @@
 <template>
-  <CatalogNavBar 
-    class="nav-bar"/>
-    <div id="catalog" class="catalog">
-      <CoffeeCatalogDrinks/>
-      <CoffeeCatalogFoods/>
-    </div>
+  <div>
+    <CatalogNavBar
+      class="nav-bar"/>
+      <div id="catalog" class="catalog">
+        <CoffeeCatalogDrinks/>
+        <CoffeeCatalogFoods/>
+      </div>
+  </div>
 </template>
 
 <script>
-import CatalogNavBar from './CatalogNavBar.vue';
+import {mapState} from 'vuex'
+import CatalogNavBar from './CatalogNavBar.vue'
 import CoffeeCatalogDrinks from './CoffeeCatalogDrinks.vue'
 import CoffeeCatalogFoods from './CoffeeCatalogFoods.vue'
 
@@ -18,7 +21,16 @@ export default {
     CoffeeCatalogDrinks,
     CoffeeCatalogFoods,
     CatalogNavBar
-  }
+  },
+  mounted(){
+    setTimeout(() => this.$store.dispatch('CLOSE_LOADING'), 3500)
+  },
+  computed: {
+        ...mapState([
+            'isModal',
+            'isLoading'
+        ])
+    },
 }
 </script>
 

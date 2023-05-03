@@ -11,6 +11,9 @@ export default {
   components: {
     MainWrapper
   },
+  created() {
+    this.$store.dispatch('OPEN_LOADING')
+  },
   computed : {
     isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
   },

@@ -1,18 +1,19 @@
 <template> 
     <div class="main-wrapper">
+        <LoadingPage v-show="isLoading" class="loading"/>
         <CoffeeHeader/>
-        <router-view/>
+        <router-view v-show="!isLoading"/>
         <vue-final-modal
             v-model="isModal"
             @click-outside="closeModal"
             classes="modal-container"
             content-class="modal-content">
-            <modal-login
-                ref="modalLogin"
-                @closeModal="closeModal">
-            </modal-login>
+                <modal-login
+                    ref="modalLogin"
+                    @closeModal="closeModal">
+                </modal-login>
         </vue-final-modal>
-        <CoffeeBottomNav
+        <CoffeeBottomNav v-show="!isLoading"
         v-if:="this.$isMobile()"/>
     </div>
 </template>
@@ -22,17 +23,20 @@ import {mapState,mapActions} from 'vuex'
 import ModalLogin from './loginModal/ModalLogin.vue'
 import CoffeeHeader from './CoffeeHeader.vue'
 import CoffeeBottomNav from './CoffeeBottomNav.vue'
+import LoadingPage from './LoadingPage.vue'
 
 export default {
     name: 'MainWrapper',
     components:{
         CoffeeHeader,
         CoffeeBottomNav,
-        ModalLogin
+        ModalLogin,
+        LoadingPage
     },
     computed: {
         ...mapState([
-            'isModal'
+            'isModal',
+            'isLoading'
         ])
     },
     methods: {
@@ -48,6 +52,14 @@ export default {
 </script>
 
 <style>
+.loading{
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+}
 .main-wrapper {
     margin-bottom: 5em;
 }

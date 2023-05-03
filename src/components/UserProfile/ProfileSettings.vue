@@ -17,7 +17,7 @@
       <span v-if="v$.tel.$error">
         <p>Введите корректный номер телефона</p>
       </span>
-      <button class="profile-settings__btn" :disabled="v$.tel.$error">Изменить имя</button>
+      <button class="profile-settings__btn" :disabled="v$.tel.$error">Изменить номер телефона</button>
     </div>
     <div class="profile-settings__password">
       <button id="changepass" class="profile-settings__password-btn">Сменить пароль</button>

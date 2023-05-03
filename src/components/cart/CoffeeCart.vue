@@ -42,6 +42,12 @@ export default {
     CartItem,
     OrderPage,
   },
+  created() {
+    // this.$store.dispatch('OPEN_LOADING')
+    // setTimeout(() => this.$store.dispatch('CLOSE_LOADING'), 1500)
+  },
+  mounted() {
+  },
   data(){ 
     return{
       address: "",

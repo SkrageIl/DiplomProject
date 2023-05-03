@@ -3,13 +3,14 @@
     <div class="order-features">
     <div class="address-order">
       <h3>Адрес получения</h3>
-      <select v-model="address" class="select-address">
+      <!-- <select v-model="address" class="select-address">
         <option disabled value="">Выберите адрес</option>
         <option
           v-for="shop in SHOPS" 
           :key="shop.id">{{shop.address}}
         </option>
-      </select>
+      </select> -->
+      <button @click="this.isModal = true">Выбрать адрес</button>
     </div>
     <div class="time-order">
       <h3>Время получения</h3>
@@ -36,9 +37,19 @@
     </div>
   </div>
   </div>
+  <vue-final-modal
+    v-model="isModal"
+    @click-outside="closeModal"
+    classes="modal-container"
+    content-class="modal-map">
+      <div class="ya-map">
+        <YaMapComp></YaMapComp>
+      </div>
+  </vue-final-modal>
 </template>
 
 <script>
+import YaMapComp from '../YaMapComp.vue'
 import VueTimePicker from "vue3-timepicker";
 import "vue3-timepicker/dist/VueTimepicker.css";
 import {  mapGetters, mapActions } from 'vuex';
@@ -47,6 +58,7 @@ export default {
   name: "OrderPage",
   components: {
     "vue-timepicker": VueTimePicker,
+    YaMapComp
   },
   mounted() {
     this.GET_SHOPS_FROM_DB()
@@ -57,7 +69,9 @@ export default {
         address: '',
         rangeHours: [10,11,12,13,14,15,16,17,18,19,20],
         rangeMinutes: [0,5,10,15,20,25,30,35,40,45,50,55],
-        isValidTime: true
+        isValidTime: true,
+        isOpenMap: false,
+        isModal: false,
     }
   },
   watch: {
@@ -96,6 +110,9 @@ export default {
     ...mapActions([
       'GET_SHOPS_FROM_DB'
     ]),
+    closeModal(){
+      this.isModal = false
+    },
     getTimeArr(){
       this.rangeHours = [10,11,12,13,14,15,16,17,18,19,20]
       let hours = new Date().getHours()
@@ -129,6 +146,10 @@ export default {
 </script>
 
 <style lang="scss">
+.ya-map{
+  width: 300px;
+  height: 400px;
+}
 .vue__time-picker .dropdown ul li:not([disabled]).active,
 .vue__time-picker .dropdown ul li:not([disabled]).active:focus,
 .vue__time-picker .dropdown ul li:not([disabled]).active:hover {
@@ -166,8 +187,8 @@ export default {
 @media(min-width: 576px){
   .order-features{
     display: grid;
-    margin-right: 30%;
-    margin-left: 27%;
+    margin-right: 25%;
+    margin-left: 25%;
     height: 100%;
     padding: 0 30px 30px;
   }

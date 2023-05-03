@@ -9,7 +9,7 @@
       />
     </div>
     <div id="meal" class="catalog-foods meal-catalog">
-      <h3 class="catalog-title">Сытное</h3>
+      <h3 class="catalog-title">Закуски</h3>
       <CoffeeCatalogItem
         v-for="food in mealCatalog"
         :key="food.article"

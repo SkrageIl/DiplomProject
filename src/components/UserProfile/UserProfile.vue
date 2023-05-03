@@ -47,6 +47,8 @@ export default {
       navActive: "orders"
     }
   },
+  created() {
+  },
   mounted() {
   },
   beforeUnmount () {

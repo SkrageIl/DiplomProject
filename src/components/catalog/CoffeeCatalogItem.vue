@@ -89,9 +89,9 @@
 </template>
 
 <script>
-import {ref} from 'vue';
+import {ref} from 'vue'
 import swipeModal from '@takuma-ru/vue-swipe-modal'
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex"
 
 export default {
   name: "CoffeeCatalogItem",

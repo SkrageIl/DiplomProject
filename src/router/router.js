@@ -59,6 +59,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    // store.dispatch('OPEN_LOADING')
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (store.getters.isLoggedIn) {
             next()
@@ -70,6 +71,9 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
+})
+router.afterEach(() => {
+    setTimeout(() => store.dispatch('CLOSE_LOADING'), 2500) // timeout for demo purposes
 })
 
 export default router

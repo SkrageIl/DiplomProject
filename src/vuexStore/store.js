@@ -5,6 +5,7 @@ import moment from 'moment'
 let store = createStore({
     state: {
         isModal: false,
+        isLoading: false,
         drinks: [],
         foods: [],
         cart: [],
@@ -109,6 +110,12 @@ let store = createStore({
         },
         CLOSE_MODAL(state) {
             state.isModal = false
+        },
+        OPEN_LOADING(state) {
+            state.isLoading = true
+        },
+        CLOSE_LOADING(state) {
+            state.isLoading = false
         },
     },
     actions: {
@@ -282,6 +289,12 @@ let store = createStore({
         },
         CLOSE_MODAL({ commit }) {
             commit('CLOSE_MODAL')
+        },
+        OPEN_LOADING({ commit }) {
+            commit('OPEN_LOADING')
+        },
+        CLOSE_LOADING({ commit }) {
+            commit('CLOSE_LOADING')
         }
     },
     getters: {

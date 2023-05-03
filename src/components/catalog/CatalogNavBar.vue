@@ -41,7 +41,7 @@
           class="catalog-nav__btn"
           :class="{selected: navActive == 'meal'}"
           @click="this.navActive = 'meal'"
-          >Сытное
+          >Закуски
         </router-link>
       </li>
     </ul>

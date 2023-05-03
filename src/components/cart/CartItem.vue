@@ -165,7 +165,13 @@ export default {
     }
   }
 }
-
+@media(min-width: 576px) and (max-width: 820px){
+  .cart-item{
+    &__left{
+      margin-left: 27%;
+    }
+  }
+}
 @media(max-width: 576px){
  .cart-item{
    max-height: 100px;
@@ -247,5 +253,12 @@ export default {
     font-family: 'Montserrat', sans-serif;
    }
  }
+}
+@media(min-width: 576px) and (max-width: 1024px){
+  .cart-item{
+    &__add{
+      margin-left: 5px;
+    }
+  }
 }
 </style>
