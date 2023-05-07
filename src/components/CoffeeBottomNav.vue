@@ -3,7 +3,7 @@
     <router-link :to="{name:'catalog'}">
         <i class="material-icons selected">coffee</i>
     </router-link>
-    <router-link :to="{name:'orders'}">
+    <router-link :to="{name:'profile'}">
       <span class="face">
         <i class="material-icons selected">face</i>
       </span>

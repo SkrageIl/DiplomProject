@@ -4,14 +4,24 @@
         <CoffeeHeader/>
         <router-view v-show="!isLoading"/>
         <vue-final-modal
-            v-model="isModal"
-            @click-outside="closeModal"
+            v-model="isModalLogin"
+            @click-outside="closeModalLogin"
             classes="modal-container"
             content-class="modal-content">
                 <modal-login
-                    ref="modalLogin"
-                    @closeModal="closeModal">
+                    ref="closeModalLogin"
+                    @closeModalLogin="closeModalLogin">
                 </modal-login>
+        </vue-final-modal>
+        <vue-final-modal
+            v-model="isModalAddress"
+            @click-outside="closeModalAddress"
+            classes="modal-container"
+            content-class="modal-map"
+        >
+            <div class="ya-map">
+                <YaMapComp/>
+            </div>
         </vue-final-modal>
         <CoffeeBottomNav v-show="!isLoading"
         v-if:="this.$isMobile()"/>
@@ -19,11 +29,12 @@
 </template>
 
 <script>
-import {mapState,mapActions} from 'vuex'
+import {mapState,mapActions, mapGetters} from 'vuex'
 import ModalLogin from './loginModal/ModalLogin.vue'
 import CoffeeHeader from './CoffeeHeader.vue'
 import CoffeeBottomNav from './CoffeeBottomNav.vue'
 import LoadingPage from './LoadingPage.vue'
+import YaMapComp from './YaMapComp.vue'
 
 export default {
     name: 'MainWrapper',
@@ -31,27 +42,39 @@ export default {
         CoffeeHeader,
         CoffeeBottomNav,
         ModalLogin,
-        LoadingPage
+        LoadingPage,
+        YaMapComp
     },
     computed: {
         ...mapState([
-            'isModal',
+            'isModalLogin',
             'isLoading'
+        ]),
+        ...mapGetters([
+          'isModalAddress'
         ])
     },
     methods: {
         ...mapActions([
-            'CLOSE_MODAL'
+            'CLOSE_MODAL_LOGIN',
+            'CLOSE_MODAL_ADDRESS'
         ]),
-        closeModal(){
-            this.CLOSE_MODAL()
+        closeModalLogin(){
+            this.CLOSE_MODAL_LOGIN()
             setTimeout(this.$refs.modalLogin.backToLogin,500)
+        },
+        closeModalAddress(){
+            this.CLOSE_MODAL_ADDRESS()
         }
     }
 }
 </script>
 
 <style>
+.ya-map{
+    width: 300px;
+    height: 400px;
+  }
 .loading{
     background-color: #ffffff;
     width: 100%;
@@ -77,5 +100,17 @@ export default {
     padding: 1rem;
     border: 1px solid #e2e8f0;
     background: #fff;
+  }
+  @media(min-width: 576px) and (max-width: 1024px){
+    .ya-map{
+        width: 550px !important;
+        height: 500px !important;
+    }
+  }
+  @media(min-width: 1024px){
+    .ya-map{
+        width: 750px !important;
+        height: 600px !important;
+    }
   }
 </style>

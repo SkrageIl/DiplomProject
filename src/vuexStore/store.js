@@ -4,7 +4,8 @@ import moment from 'moment'
 
 let store = createStore({
     state: {
-        isModal: false,
+        isModalLogin: false,
+        isModalAddress: false,
         isLoading: false,
         drinks: [],
         foods: [],
@@ -15,6 +16,7 @@ let store = createStore({
         shops: [],
         order: {},
         userOrders: [],
+        address: localStorage.getItem('address') || ''
     },
     mutations: {
         auth_request(state) {
@@ -93,11 +95,11 @@ let store = createStore({
         SET_TIME_ORDER_TO_STATE(state, time) {
             state.order.time = time
         },
-        SET_ADDRESS_ORDER_TO_STATE(state, address) {
-            state.order.address = address
-        },
         SET_ORDER_TO_STATE(state, order) {
             state.order = order
+        },
+        SET_ADDRESS_TO_STATE(state, address) {
+            state.address = address
         },
         CLEAR_CART(state) {
             state.cart = []
@@ -105,11 +107,17 @@ let store = createStore({
         CLEAR_ORDER(state) {
             state.order = {}
         },
-        OPEN_MODAL(state) {
-            state.isModal = true
+        OPEN_MODAL_LOGIN(state) {
+            state.isModalLogin = true
         },
-        CLOSE_MODAL(state) {
-            state.isModal = false
+        CLOSE_MODAL_LOGIN(state) {
+            state.isModalLogin = false
+        },
+        OPEN_MODAL_ADDRESS(state) {
+            state.isModalAddress = true
+        },
+        CLOSE_MODAL_ADDRESS(state) {
+            state.isModalAddress = false
         },
         OPEN_LOADING(state) {
             state.isLoading = true
@@ -253,7 +261,8 @@ let store = createStore({
                 orderItem.price = item.price
                 orderItem.quantity = item.quantity
                 orderItem.size = item.size
-                orderItem.img = item.img
+                orderItem.img = item.image
+                orderItem.type = item.type
                 items.push(orderItem)
             })
 
@@ -284,11 +293,21 @@ let store = createStore({
                 console.log(error)
             })
         },
-        OPEN_MODAL({ commit }) {
-            commit('OPEN_MODAL')
+        SET_ADDRESS({ commit }, address) {
+            localStorage.setItem('address', address)
+            commit('SET_ADDRESS_TO_STATE', address)
         },
-        CLOSE_MODAL({ commit }) {
-            commit('CLOSE_MODAL')
+        OPEN_MODAL_LOGIN({ commit }) {
+            commit('OPEN_MODAL_LOGIN')
+        },
+        CLOSE_MODAL_LOGIN({ commit }) {
+            commit('CLOSE_MODAL_LOGIN')
+        },
+        OPEN_MODAL_ADDRESS({ commit }) {
+            commit('OPEN_MODAL_ADDRESS')
+        },
+        CLOSE_MODAL_ADDRESS({ commit }) {
+            commit('CLOSE_MODAL_ADDRESS')
         },
         OPEN_LOADING({ commit }) {
             commit('OPEN_LOADING')
@@ -319,6 +338,9 @@ let store = createStore({
         CART(state) {
             return state.cart;
         },
+        ADDRESS(state) {
+            return state.address
+        },
         CART_TOTAL_QUANTITY(state) {
             let totalQuantity = 0;
             state.cart.forEach(function(item) {
@@ -347,6 +369,8 @@ let store = createStore({
         },
         isLoggedIn: state => !!state.token,
         authStatus: state => state.status,
+        isModalLogin: state => state.isModalLogin,
+        isModalAddress: state => state.isModalAddress
     }
 })
 

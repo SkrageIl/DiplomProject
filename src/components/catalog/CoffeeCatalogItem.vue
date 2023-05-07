@@ -1,9 +1,10 @@
 <template>
   <div class="catalog-item">
     <div class="catalog-item__top-content" :class="classes" @click="openModal()">
-    <img class="item__image" src="@/assets/glyase.png" alt="img" />
+    <img class="item__image" :src="require(`@/assets/catalog/${product_data.image}.png`)" alt="img" />
     </div>
-    <h3 class="item__name">{{ product_data.name }}</h3>
+    <div class="catalog-item__bot-content">
+      <h3 class="item__name">{{ product_data.name }}</h3>
     <div class="catalog-item__bot-content">
     <div class="bot-content__sizes" v-if="product_data.article.indexOf('F')">
       <button class="item__size" :class="{selected: size == 0.2}" @click="selectSize(0.2)">0.2л</button>
@@ -24,6 +25,7 @@
     </div>
     </div>
   </div>
+  </div>
   <vue-final-modal
     v-model="isItemModal"
     @click-outside="closeModal"
@@ -31,11 +33,11 @@
     classes="modal-container"
     content-class="modal-content modal-item">
       <div class="catalog-item__top-content modal-top-content" :class="classes">
-        <img class="item__image modal-item__img swipe_item_img" src="@/assets/glyase.png" alt="img"/>
+        <img class="item__image modal-item__img swipe_item_img" :src="require(`@/assets/catalog/${product_data.image}.png`)" alt="img"/>
         <div class="top-content__sizes" v-if="!product_data.article.indexOf('C')">
-          <button class="item__size" :class="{selected: size == 0.2}" @click="selectSize(0.2)">0.2л</button>
-          <button class="item__size" :class="{selected: size == 0.3}" @click="selectSize(0.3)">0.3л</button>
-          <button class="item__size" :class="{selected: size == 0.4}" @click="selectSize(0.4)">0.4л</button>
+          <button class="item__size modal-size" :class="{selected: size == 0.2}" @click="selectSize(0.2)">0.2л</button>
+          <button class="item__size modal-size" :class="{selected: size == 0.3}" @click="selectSize(0.3)">0.3л</button>
+          <button class="item__size modal-size" :class="{selected: size == 0.4}" @click="selectSize(0.4)">0.4л</button>
         </div>
       </div>
       <div class="catalog-item__bot-content modal-bot-content">
@@ -61,7 +63,7 @@
     >
     <div class="swipe-modal" :class="classes">
       <div class="catalog-item__top-content modal-top-content">
-        <img class="item__image modal-item__img" src="@/assets/glyase.png" alt="img"/>
+        <img class="item__image modal-item__img" :src="require(`@/assets/catalog/${product_data.image}.png`)" alt="img"/>
         <div class="top-content__sizes" v-if="!product_data.article.indexOf('C')">
           <button class="item__size swipe-modal__size" :class="{selected: size == 0.2}" @click="selectSize(0.2)">0.2л</button>
           <button class="item__size swipe-modal__size" :class="{selected: size == 0.3}" @click="selectSize(0.3)">0.3л</button>
@@ -218,6 +220,14 @@ export default {
     border-radius: 18px;
     border-bottom-left-radius: 10%;
     border-bottom-right-radius: 10%;
+    min-height: 125px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+  &__bot-content{
+    display: grid;
+    align-items: center;
   }
   -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
@@ -245,9 +255,9 @@ export default {
     margin: 10%
   }
   &__name{
-    margin: 6%;
-    margin-top: 10%;
+    margin: 15px 0 0 10px;
     width: 60%;
+    min-height: 3em;
     text-align: start;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
@@ -377,6 +387,9 @@ export default {
 .swipe-modal-footer{
   padding-bottom: 1rem;
 }
+.modal-size{
+  width: 50px;
+}
 
 @media(max-width: 576px){
   .item{
@@ -446,6 +459,7 @@ export default {
     &__size{
       font-size: 13px;
       padding: 10% 10%;
+      width: 50px;
     }
     &__quantity{
       height: 40px;
@@ -518,6 +532,13 @@ export default {
         font-family: 'Montserrat', sans-serif;
         font-weight: 800;
         font-size: 20px;
+      }
+    }
+  }
+  @media(min-width: 1024px){
+    .catalog-item{
+      &__top-content{
+        min-height: 60%;
       }
     }
   }

@@ -72,6 +72,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p{
+  color: red;
+  text-align: left;
+}
 .profile-settings{
   display: grid;
 

@@ -1,9 +1,10 @@
 <template>
   <MainWrapper/>
-  <notifications width="250px" position="top center" max="3"/>
+  <notifications width="250px" position="top center" max="3" />
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import MainWrapper from './components/MainWrapper.vue'
 
 export default {
@@ -13,11 +14,20 @@ export default {
   },
   created() {
     this.$store.dispatch('OPEN_LOADING')
+    if (this.ADDRESS == "") {
+      setTimeout(() => this.OPEN_MODAL_ADDRESS(), 3000)
+    }
   },
   computed : {
+    ...mapGetters([
+      'ADDRESS'
+    ]),
     isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
   },
   methods: {
+    ...mapActions([
+      'OPEN_MODAL_ADDRESS'
+    ]),
     logout: function () {
       this.$store.dispatch('logout')
       .then(() => {

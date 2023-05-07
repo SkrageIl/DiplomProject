@@ -3,19 +3,16 @@
     <div class="order-features">
     <div class="address-order">
       <h3>Адрес получения</h3>
-      <!-- <select v-model="address" class="select-address">
-        <option disabled value="">Выберите адрес</option>
-        <option
-          v-for="shop in SHOPS" 
-          :key="shop.id">{{shop.address}}
-        </option>
-      </select> -->
-      <button @click="this.isModal = true">Выбрать адрес</button>
+      <button @click="this.OPEN_MODAL_ADDRESS" class="btn-address">
+        <span v-if="this.ADDRESS !== ''">{{this.ADDRESS}}</span>
+        <span v-else>Выбрать адрес</span>
+      </button>
     </div>
     <div class="time-order">
       <h3>Время получения</h3>
       <vue-timepicker
         input-width="250px"
+        input-class="input-timepicker"
         v-model="time"
         :hour-range="this.rangeHours"
         :minute-range="this.rangeMinutes"
@@ -23,7 +20,7 @@
         :minute-interval="5"
         close-on-complete
         hour-label="Часы" minute-label="Минуты"
-        placeholder="Выберите время"
+        placeholder="Выбрать время"
         @open="checkRange()"
         @change="timeWasChanged()">
         <template v-slot:icon>
@@ -37,19 +34,9 @@
     </div>
   </div>
   </div>
-  <vue-final-modal
-    v-model="isModal"
-    @click-outside="closeModal"
-    classes="modal-container"
-    content-class="modal-map">
-      <div class="ya-map">
-        <YaMapComp></YaMapComp>
-      </div>
-  </vue-final-modal>
 </template>
 
 <script>
-import YaMapComp from '../YaMapComp.vue'
 import VueTimePicker from "vue3-timepicker";
 import "vue3-timepicker/dist/VueTimepicker.css";
 import {  mapGetters, mapActions } from 'vuex';
@@ -57,8 +44,7 @@ import {  mapGetters, mapActions } from 'vuex';
 export default {
   name: "OrderPage",
   components: {
-    "vue-timepicker": VueTimePicker,
-    YaMapComp
+    "vue-timepicker": VueTimePicker
   },
   mounted() {
     this.GET_SHOPS_FROM_DB()
@@ -66,22 +52,16 @@ export default {
   data() {
     return {
         time: '',
-        address: '',
         rangeHours: [10,11,12,13,14,15,16,17,18,19,20],
         rangeMinutes: [0,5,10,15,20,25,30,35,40,45,50,55],
         isValidTime: true,
-        isOpenMap: false,
-        isModal: false,
+        isOpenMap: false
     }
   },
   watch: {
-    address(){
-      this.$emit('addressChange', this.address)
-    },
     time(){
       let curTime = new Date()
       let tempTime = this.time.split(":")
-      console.log("asdasd")
       if ((curTime.getHours() == +tempTime[0]) && (+tempTime[1] < curTime.getMinutes() + 5)) {
         this.isValidTime = false
       } else if (!this.time.includes("HH") && !this.time.includes("mm") && this.time !== "") {
@@ -103,16 +83,15 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'SHOPS'
+      'SHOPS',
+      'ADDRESS'
     ]),
   },
   methods: {
     ...mapActions([
-      'GET_SHOPS_FROM_DB'
+      'GET_SHOPS_FROM_DB',
+      'OPEN_MODAL_ADDRESS'
     ]),
-    closeModal(){
-      this.isModal = false
-    },
     getTimeArr(){
       this.rangeHours = [10,11,12,13,14,15,16,17,18,19,20]
       let hours = new Date().getHours()
@@ -155,6 +134,20 @@ export default {
 .vue__time-picker .dropdown ul li:not([disabled]).active:hover {
     background: #e36206;
     color: #fff
+}
+.input-timepicker{
+  font-weight: 700;
+}
+.btn-address{
+  width: 250px;
+  height: 2.2em;
+  padding: 0.3em 0.5em;
+  font-size: 1em;
+  background-color: transparent;
+  border: 1px solid #d2d2d2;
+  text-align: left;
+  color: #000000;
+  font-weight: 600;
 }
 .order-page{
   display: grid;
@@ -203,6 +196,9 @@ export default {
   }
   .select-address{
     font-size: 1em;
+  }
+  .btn-address{
+    font-size: 20px;
   }
 }
 </style>

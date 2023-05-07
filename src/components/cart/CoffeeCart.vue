@@ -14,18 +14,18 @@
         @deleteFromCart="deleteFromCart(index)"
         @addQuantity="addQuantity"
         @subtractQuantity="subtractQuantity"
+        @checkValidItem="checkValidItem"
       />
     </div>
     <OrderPage 
       v-if="CART.length != 0"
-      @addressChange="addressChange"
       @timeChange="timeChange"
     />
     <div class="bottom-cart" v-if="CART.length != 0">
       <div class="cart__total">
         <span class="cart__label-total">Итого:</span>
         <span class="cart__number-total">{{ CART_TOTAL }} &#8381;</span>
-        <button class="cart__btn-order" :disabled="!isValidAddress || !isValidTime" @click="confirmOrder()">Оформить заказ</button>
+        <button class="cart__btn-order" :disabled="!isValidAddress || !isValidTime || !checkValidItem" @click="confirmOrder()">Оформить заказ</button>
       </div>
     </div>
   </div>
@@ -43,32 +43,32 @@ export default {
     OrderPage,
   },
   created() {
-    // this.$store.dispatch('OPEN_LOADING')
-    // setTimeout(() => this.$store.dispatch('CLOSE_LOADING'), 1500)
   },
   mounted() {
   },
   data(){ 
     return{
-      address: "",
       time: "",
-      isValidAddress: false,
       isValidTime: false
     }
-  },
-  watch: {
-    address(){
-      if (this.address !== "") {
-        this.isValidAddress = true
-      }
-    },
   },
   computed: {
     ...mapGetters([
       'CART',
       'CART_TOTAL',
+      'ADDRESS',
       'isLoggedIn'
     ]),
+    isValidAddress(){
+      if (this.ADDRESS !== "") {
+        return true
+      } else return false
+    },
+    checkValidItem(isValidItem){
+      if (isValidItem) {
+        return true
+      } else return false
+    }
   },
   methods: {
     ...mapActions([
@@ -77,9 +77,6 @@ export default {
       'SUBTRACT_QUANTITY',
       'SET_ORDER'
     ]),
-    addressChange(address){
-      this.address = address
-    },
     timeChange(timePick){
       this.isValidTime = timePick.isValidTime
       this.time = timePick.time
@@ -95,10 +92,10 @@ export default {
     },
     confirmOrder(){
       if (this.isLoggedIn) {
-        this.SET_ORDER({address: this.address, time: this.time})
+        this.SET_ORDER({address: this.ADDRESS, time: this.time})
         .then(() => this.$router.push('/'))
         .catch(err => console.log(err))
-      } else this.$store.dispatch('OPEN_MODAL')
+      } else this.$store.dispatch('OPEN_MODAL_LOGIN')
     }
   }
 }

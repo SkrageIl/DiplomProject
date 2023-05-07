@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <button @click="closeModal" class="close-popup-btn">X</button>
+    <button @click="closeModalLogin" class="close-popup-btn">X</button>
     <h4 class="login-form__label">Вход</h4>
     <form class="content-form" @submit.prevent="Login">
       <div class="content-form__phone">
@@ -70,7 +70,7 @@ export default {
       let password = this.password
       this.login({ tel, password })
       .then(() => {
-        this.closeModal()
+        this.closeModalLogin()
       })
       .catch(err => console.log(err + password))
       setTimeout(() => {
@@ -82,8 +82,8 @@ export default {
         }
       }, 100)
     },
-    closeModal(){
-      this.$emit("closeModal")
+    closeModalLogin(){
+      this.$emit("closeModalLogin")
     },
     OpenRegistrationForm(){
       this.$emit("openRegistration")

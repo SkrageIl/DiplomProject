@@ -1,7 +1,7 @@
 <template>
   <div class="register-form">
     <button @click="openLoginForm" class="back-popup-btn">&#10094;</button>
-    <button @click="closeModal" class="close-popup-btn">X</button>
+    <button @click="closeModalLogin" class="close-popup-btn">X</button>
     <h4 class="register-form__label">Регистрация</h4>
     <form @submit.prevent="Register" class="content-form">
       <div class="content-form__name">
@@ -86,8 +86,8 @@ export default {
     }
   },
   methods: {
-    closeModal(){
-      this.$emit("closeModal")
+    closeModalLogin(){
+      this.$emit("closeModalLogin")
     },
     openLoginForm(){
       this.$emit("openLogin")
@@ -102,7 +102,7 @@ export default {
       }
       this.$store.dispatch('register', data)
       .then(() => {
-        this.closeModal()
+        this.closeModalLogin()
         this.$router.push('/')
       })
       .catch(

@@ -32,25 +32,38 @@ export default {
   mounted() {
     this.GET_FOODS_FROM_DB()
   },
+  data() {
+    return {
+    }
+  },
   computed: {
     ...mapGetters([
-      'FOODS'
+      'FOODS',
+      'ADDRESS'
     ]),
     mealCatalog(){
-      return this.FOODS.filter(function(food){
-        return food.type == "Сытное"
-      })
+      return this.FOODS.filter(this.filterMeelByAddress)
     },
     sweetCatalog(){
-      return this.FOODS.filter(function(food){
-        return food.type == "Сладкое"
-      })
+      return this.FOODS.filter(this.filterSweetByAddress)
     }
   },
   methods: {
     ...mapActions([
       'GET_FOODS_FROM_DB'
-    ])
+    ]),
+    filterMeelByAddress(food){
+      let address = this.ADDRESS
+      if(food.type == "Сытное" && food.coffeeshops.includes(address)){
+        return true
+      } else return false
+    },
+    filterSweetByAddress(food){
+      let address = this.ADDRESS
+      if(food.type == "Сладкое" && food.coffeeshops.includes(address)){
+        return true
+      } else return false
+    }
   }
 }
 </script>

@@ -1,99 +1,133 @@
 <template>
-    <yandex-map
-          ref="map"
-          :coords="[50.287003, 127.540839]"
-          zoom="12"
-          class="yamap"
-          :controls="[
-          'geolocationControl',
-          'routeEditor',
-          'zoomControl']"
-          :behaviors="[
-            'multiTouch', 'scrollZoom', 'drag'
-          ]"
-          :scroll-zoom="true"
-          @map-was-initialized="onInitMap"
-        >
-          <ymap-marker
-            v-for="shop in SHOPS"
-            :key="shop.id"
-            :coords="getCoord(shop.id)"
-            :marker-id="shop.id" 
-          />
-        </yandex-map>
+  <div class="btn">
+    <button @click="this.CLOSE_MODAL_ADDRESS" class="close-popup-btn">X</button>
+  </div>
+  <YandexMap
+  :coordinates="coords"
+  :zoom="12" 
+  @created="onInit"
+  class="yamap"
+  >
+    <YandexMarker
+      v-for="address in addresses"
+      :key="address.id"
+      :coordinates="address.coords"
+      :marker-id="address.id" 
+    >
+      <template #component>
+        <YaMapShop :map_shop_data="address"/>
+      </template>
+    </YandexMarker>
+  </YandexMap>
 </template>
 
 <script>
-import { yandexMap, ymapMarker, loadYmap } from "vue-yandex-maps"
-import {mapGetters} from 'vuex'
+import { YandexMap, YandexMarker } from "vue-yandex-maps";
+import getGlobalYandexMapVar from "@/utils.js";
+import {mapGetters, mapActions} from 'vuex'
+import YaMapShop from "./YaMapShop.vue";
 
 export default {
   name: "YaMapComp",
   components: {
-    yandexMap,
-    ymapMarker 
+    YandexMap,
+    YandexMarker,
+    YaMapShop
   },
- async mounted() {
-  // let coord = []
-    const settings = {apiKey: '30bb15aa-73af-4d6c-a8f2-89c1d2ec8967', lang: 'en_US' };
-    await loadYmap({ ...settings, debug: true });
-    /* eslint-disable */
-    var myReverseGeocoder = ymaps.geocode("ул. Горького, 150, Благовещенск, Амурская область")
-    myReverseGeocoder.then(function (res) {
-					// console.log(res.geoObjects.get(0).properties.get('text'));
-          // console.log(res.geoObjects.get(0).geometry.getCoordinates());
-          // coord.push(res.geoObjects.get(0).geometry.getCoordinates()[0])
-          // coord.push(res.geoObjects.get(0).geometry.getCoordinates()[1])
-          // console.log(res.geoObjects.get(0).geometry.getCoordinates()[0])
-          // console.log(res.geoObjects.get(0).geometry.getCoordinates()[1])
-          // console.log(coord)
-				});
+  async mounted() {
+    await getGlobalYandexMapVar();
   },
   data() {
     return {
-      map: null,
-      behaviors: [
-        'multiTouch', 'scrollZoom'
+      mapInstance: null,
+      coords: [
+        50.287504, 
+        127.541124
       ],
-      coord: [50.271777, 127.522745],
-      a: 0,
-      b: 0,
+      addresses: [
+        {
+          id: 0,
+          address: "ул. Калинина, 83",
+          coords: [50.271777, 127.522745],
+          time: "09:00 - 21:00",
+          phone: "+7(999)999-99-90"
+        },
+        {
+          id: 1,
+          address: "ул. 50 лет Октября, 28",
+          coords: [50.265363, 127.534971],
+          time: "09:00 - 20:00",
+          phone: "+7(999)999-99-99"
+        },
+        {
+          id: 2,
+          address: "ул. Театральная, 128",
+          coords: [50.273545, 127.553269],
+          time: "09:00 - 20:00",
+          phone: "+7(999)999-99-99"
+        },
+        {
+          id: 3,
+          address: "ул. Воронкова, 12",
+          coords: [50.305745, 127.521218],
+          time: "09:00 - 20:00",
+          phone: "+7(999)999-99-99"
+        },
+      ]
     }
   },
   props: {},
   methods: {
-    onInitMap(map) {
-      this.map = map;
-    },
-    getCoord(id){
-      let coord = []
-      let a = 0
-      let b = 0
-      let address = this.SHOPS[id].address
-      var myReverseGeocoder = ymaps.geocode(address)
-      // Посмотреть промисы
-        myReverseGeocoder.then(function (res) {
-              a = res.geoObjects.get(0).geometry.getCoordinates()[0]
-              b = res.geoObjects.get(0).geometry.getCoordinates()[1]
-		    		}).then(() => {
-              coord.push(a)
-              coord.push(b)
-            })
-            console.log(coord)
-            return coord
+    ...mapActions([
+      'CLOSE_MODAL_ADDRESS'
+    ]),
+    onInit(e) {
+      this.mapInstance = e
     }
   },
   computed: {
     ...mapGetters([
       'SHOPS'
     ]),
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+.btn{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.close-popup-btn{
+  position: fixed;
+  font-size: 15px;
+  padding: 7px 9px;
+  color: #ffffff;
+  background-color: #cccccc;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 1;
+  margin-right: -13px;
+}
 .yamap{
   width: 300px;
   height: 400px;
+}
+.shop-item{
+  margin-top: 10px;
+}
+@media(min-width: 576px) and (max-width: 1024px){
+  .yamap{
+    width: 550px;
+    height: 500px;
+  }
+}
+@media(min-width: 1024px){
+  .yamap{
+      width: 750px !important;
+      height: 600px !important;
+  }
 }
 </style>

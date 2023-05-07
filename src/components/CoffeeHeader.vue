@@ -2,6 +2,7 @@
 <div class="header">
   <div class="coffee-header">
     <button v-if="this.$route.path !== '/'" @click="goBack()" class="back-popup-btn">&#10094;</button>
+    <button v-if="this.$route.path == '/'" @click="this.OPEN_MODAL_ADDRESS" class="coffee-header__address">{{this.ADDRESS}}</button>
     <router-link :to="{name:'catalog'}" class="header__glogo">
       <img src="@/assets/logo.png" alt="logo" class="header__logo">
     </router-link>
@@ -40,16 +41,18 @@ export default {
   computed: {
     ...mapGetters([
       'CART_TOTAL_QUANTITY',
-      'isLoggedIn'
+      'isLoggedIn',
+      'ADDRESS'
     ])
   },
   methods: {
     ...mapActions([
       'logout',
-      'OPEN_MODAL'
+      'OPEN_MODAL_LOGIN',
+      'OPEN_MODAL_ADDRESS'
     ]),
     openModal(){
-      this.OPEN_MODAL()
+      this.OPEN_MODAL_LOGIN()
     },
     goBack(){
       if (this.$route.path.includes('profile')) {
@@ -118,6 +121,23 @@ export default {
   display: flex;
   width: 100%;
   justify-content: center;
+  &__address{
+    border: none;
+    position: fixed;
+    font-weight: 700;
+    left: 0;
+    margin-left: 15px;
+    margin-top: 8em;
+    top: 0;
+    font-size: 15px;
+    background-color: #ffffff75;
+    color: #3a3939;
+    border-radius: 10px;
+    padding: 5px 7px 2px 7px;
+    -webkit-box-shadow: 0px 5px 10px -2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 10px -2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 10px -2px rgba(34, 60, 80, 0.2);
+  }
 }
 .profile-icon{
   color: white;
@@ -130,6 +150,11 @@ export default {
 }
 
 @media(min-width: 576px){
+  .coffee-header{
+    &__address{
+      font-size: 18px;
+    }
+  }
   .header{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -159,6 +184,21 @@ export default {
     border-radius: 50%;
     padding: 3px;
     font-size: 15px;
+  }
+}
+@media(min-width: 576px) and (max-width: 800px){
+  .coffee-header{
+    &__address{
+      margin-top: 7em;
+    }
+  }
+}
+@media(min-width: 1024px){
+  .coffee-header{
+    &__address{
+      width: 20%;
+      padding: 10px;
+    }
   }
 }
 </style>

@@ -32,25 +32,38 @@ export default {
   mounted() {
     this.GET_DRINKS_FROM_DB()
   },
+  data() {
+    return {
+    }
+  },
   computed: {
     ...mapGetters([
-      'DRINKS'
+      'DRINKS',
+      'ADDRESS'
     ]),
     teaCatalog(){
-      return this.DRINKS.filter(function(drink){
-        return drink.type == "Чай"
-      })
+      return this.DRINKS.filter(this.filterTeaByAddress)
     },
     coffeeCatalog(){
-      return this.DRINKS.filter(function(drink){
-        return drink.type == "Кофе"
-      })
+      return this.DRINKS.filter(this.filterCoffeeByAddress)
     }
   },
   methods: {
     ...mapActions([
       'GET_DRINKS_FROM_DB'
-    ])
+    ]),
+    filterCoffeeByAddress(drink){
+      let address = this.ADDRESS
+      if(drink.type == "Кофе" && drink.coffeeshops.includes(address)){
+        return true
+      } else return false
+    },
+    filterTeaByAddress(drink){
+      let address = this.ADDRESS
+      if(drink.type == "Чай" && drink.coffeeshops.includes(address)){
+        return true
+      } else return false
+    }
   }
 }
 </script>

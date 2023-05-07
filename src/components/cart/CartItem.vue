@@ -2,7 +2,7 @@
   <div class="cart-item">
     <div class="cart-item__left">
       <span class="cart-item__img-content" :class="classes">
-        <img src="@/assets/glyase.png" class="cart-item__img">
+        <img :src="require(`@/assets/catalog/${cart_item_data.image}.png`)" class="cart-item__img">
       </span>
       <div class="cart-item__center">
         <span class="cart-item__name">{{ cart_item_data.name }}</span>
@@ -15,9 +15,13 @@
     <button class="cart-item__sub" @click="subtractQuantity">-</button>
   </div>
 </div>
+<div class="error-item" v-if="!isValidItem">
+  <p>К сожалению, по адресу {{this.ADDRESS}} данный товар недоступен для заказа!</p>
+</div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 
 export default {
   name: "CartItem",
@@ -36,6 +40,20 @@ export default {
       type: Object,
       default() {
         return {}
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'ADDRESS'
+    ]),
+    isValidItem(){
+      if (this.cart_item_data.coffeeshops.includes(this.ADDRESS)) {
+        this.$emit('checkValidItem', true)
+        return true
+      } else {
+        this.$emit('checkValidItem', false)
+        return false
       }
     }
   },
@@ -63,6 +81,13 @@ export default {
 .meal{
   background-color: #f57878  !important;
 }
+.error-item{
+  p{
+    margin-top: -30px;
+    margin-bottom: 40px;
+    color: red;
+  }
+}
 .cart-item{
   max-height: 100px;
   display: flex;
@@ -75,15 +100,17 @@ export default {
    margin-left: 30%;
   }
   &__img{
-
+    width: 70px;
   }
   &__img-content{
-   background-color: #ffb21c;
-   border-radius: 15px;
-   justify-content: center;
-   display: flex;
-   width: 90px;
-   height: 90px;
+    border-radius: 15px;
+    padding: 5px;
+    min-height: 5em;
+    min-width: 5em;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
   }
   &__name{
    font-weight: 600;
@@ -164,6 +191,11 @@ export default {
       order: 2;
     }
   }
+  .error-item{
+    p{
+      margin: -20px 20% 40px 20%;
+    }
+  }
 }
 @media(min-width: 576px) and (max-width: 820px){
   .cart-item{
@@ -183,9 +215,6 @@ export default {
     display: grid;
     margin: 0;
     grid-template-columns: 6em 9em;
-   }
-   &__img{
- 
    }
    &__img-content{
     background-color: #ffb21c;
@@ -258,6 +287,13 @@ export default {
   .cart-item{
     &__add{
       margin-left: 5px;
+    }
+  }
+}
+@media(min-width: 1024px){
+  .error-item{
+    p{
+      margin: -4% 30% 40px 30%;
     }
   }
 }

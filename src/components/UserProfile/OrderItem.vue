@@ -14,7 +14,11 @@
           </span>
           <span class="top-content__status" :class="classes">{{ orderItem_data.status }}</span>
         </div>
-        <span>{{ orderItem_data.time }}</span>
+
+        <div class="top-content__time">
+          <span>{{ orderItem_data.time.split(" ")[0] }}</span>
+          <span>{{ orderItem_data.time.split(" ")[1] }}</span>
+        </div>
       </div>
       <div class="top-content__features">
         <span class="features-top">
@@ -26,7 +30,9 @@
         <div class="bot-content__order-items">
           <ul class="bot-content__items" ref="items">
             <li v-for="item in orderItem_data.item" :key="item.index" class="bot-content__item">
-              <img :src="item.img" alt="" class="bot-content__img">
+              <div class="img-item" :class="classBg(item)">
+                <img :src="require(`@/assets/catalog/${item.img}.png`)" alt="" class="bot-content__img">
+              </div>
               <div class="bot-content__features">
                 <span class="bot-content__name">
                   {{ item.name }}
@@ -61,8 +67,8 @@ export default {
         cook: this.orderItem_data.status == 'Готовим',
         ready: this.orderItem_data.status == 'Готов',
         done: this.orderItem_data.status == 'Завершен'
-      } 
-    }
+      }
+    } 
   },
   props: {
     orderItem_data: {
@@ -73,6 +79,17 @@ export default {
     }
   },
   methods: {
+    classBg(item){
+      if(item.type == 'Чай'){
+        return "tea"
+      } else if(item.type == 'Кофе'){
+        return "coffee"
+      } else if(item.type == 'Сладкое'){
+        return "sweet"
+      } else if(item.type == 'Сытное'){
+        return "meal"
+      }
+    }
   },
 };
 </script>
@@ -108,35 +125,46 @@ export default {
     margin-left: 5px;
     color: #d7b509
   }
+  &__time{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    text-align: right;
+  }
 }
 .bot-content{
   &__img{
-    width: 2em;
+    width: 3.25em;
   }
   &__items{
     display: flex;
+    align-items: flex-end;
     overflow-x: scroll;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     list-style: none;
     padding: 0;
+    
   }
   &__items::-webkit-scrollbar { width: 0; }
   &__items{ -ms-overflow-style: none; }
   &__items{ overflow: -moz-scrollbars-none; }
 
   &__item{
-    padding: 1em;
+    padding: 0.7em;
+    display: grid;
+    justify-items: center;
   }
   &__order-items{
     width: auto;
   }
   &__features{
     display: grid;
+    max-width: 5em;
   }
   &__name{
     min-height: 2.5em;
-    color: #999999
+    color: #999999;
+    text-align: left;
   }
   &__price{
     font-weight: 600;
@@ -164,12 +192,32 @@ export default {
 .done{
   color: green !important;
 }
+.coffee{
+  background-color: #FFB21C !important;
+}
+.tea{
+  background-color: #69af60 !important;
+}
+.sweet{
+  background-color: #f6a9f9 !important;
+}
+.meal{
+  background-color: #f57878  !important;
+}
   .features-top{
     font-weight: 700;
     font-size: 1.25em;
   }
   .features-address{
     color: #999999;
+  }
+  .img-item{
+    min-height: 5em;
+    min-width: 5em;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
   }
   @media(min-width: 576px){
     .order-item{

@@ -12,7 +12,7 @@ const router = createRouter({
         if (to.hash) {
             return {
                 el: to.hash,
-                top: 100,
+                top: 115,
                 behavior: 'smooth'
             }
         }
@@ -59,21 +59,24 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    // store.dispatch('OPEN_LOADING')
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (store.getters.isLoggedIn) {
+            if (to.name == 'profile') {
+                next('/profile/orders')
+                return
+            }
             next()
             return
         } else {
             next('/')
-            store.dispatch('OPEN_MODAL')
+            store.dispatch('OPEN_MODAL_LOGIN')
         }
     } else {
         next()
     }
 })
 router.afterEach(() => {
-    setTimeout(() => store.dispatch('CLOSE_LOADING'), 2500) // timeout for demo purposes
+    setTimeout(() => store.dispatch('CLOSE_LOADING'), 2500)
 })
 
 export default router

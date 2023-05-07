@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
 import CatalogNavBar from './CatalogNavBar.vue'
 import CoffeeCatalogDrinks from './CoffeeCatalogDrinks.vue'
 import CoffeeCatalogFoods from './CoffeeCatalogFoods.vue'
@@ -23,13 +22,8 @@ export default {
     CatalogNavBar
   },
   mounted(){
-    setTimeout(() => this.$store.dispatch('CLOSE_LOADING'), 3500)
   },
   computed: {
-        ...mapState([
-            'isModal',
-            'isLoading'
-        ])
     },
 }
 </script>
@@ -50,6 +44,7 @@ export default {
 }
 @media(max-width: 576px){
   .catalog{
+    margin-top: 7em;
     padding: 0 10% 0 10%;
   }
 }

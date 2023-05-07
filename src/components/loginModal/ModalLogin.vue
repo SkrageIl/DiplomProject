@@ -1,12 +1,12 @@
 <template>
     <LoginForm
       v-if="!isRegistry"
-      @closeModal="closeModal"
+      @closeModalLogin="closeModalLogin"
       @openRegistration="this.isRegistry = true">
     </LoginForm>
     <RegisterForm
       v-if="isRegistry"
-      @closeModal="closeModal"
+      @closeModalLogin="closeModalLogin"
       @openLogin="this.isRegistry = false">
     </RegisterForm>
 </template>
@@ -30,8 +30,8 @@ export default {
     backToLogin(){
       this.isRegistry = false
     },
-    closeModal(){
-      this.$emit("closeModal")
+    closeModalLogin(){
+      this.$emit("closeModalLogin")
     }
   }
 };
