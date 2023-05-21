@@ -13,6 +13,7 @@ import easySpinner from 'vue-easy-spinner'
 import Vue3Lottie from 'vue3-lottie'
 import 'vue3-lottie/dist/style.css'
 import YmapPlugin from 'vue-yandex-maps'
+import './registerServiceWorker'
 
 const settings = {
     apiKey: '30bb15aa-73af-4d6c-a8f2-89c1d2ec8967',

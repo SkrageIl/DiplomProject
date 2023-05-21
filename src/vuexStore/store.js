@@ -50,6 +50,7 @@ let store = createStore({
         SET_TO_CART: (state, product) => {
             let itemProduct = Object.assign({}, product.product_data)
             itemProduct.size = product.size
+            itemProduct.price = product.price
             itemProduct.quantity = 1
             if (state.cart.length) {
                 let isProductExists = false
@@ -179,7 +180,6 @@ let store = createStore({
                     localStorage.removeItem('token')
                     localStorage.removeItem('user')
                     delete axios.defaults.headers.common['Authorization']
-                    this.$router.push('/')
                     resolve()
                 } catch (err) {
                     commit('auth_error', err)

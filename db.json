@@ -5,16 +5,15 @@
       "name": "Капучино",
       "article": "C1",
       "image": "kapuchino",
-      "price": "120",
+      "price": 120,
       "quantity": 0,
       "type": "Кофе",
       "title": "Кофе с густой молочной пенкой. Насладитесь своим фаворитным напитком, созданным специально для вас!",
       "coffeeshops": [
         "ул. Калинина, 83",
         "ул. 50 лет Октября, 28",
-        "ул. Театральная, 128",
         "ул. Воронкова, 12",
-        "ул. Театральная, 58",
+        "ул. Театральная, 128",
         "ул. Театральная, 42"
       ]
     },
@@ -402,7 +401,7 @@
         "name": "Ваня",
         "tel": "+79999999999"
       },
-      "time": "23-04-2023 11:15",
+      "time": "20-05-2023 11:15",
       "address": "ул. Воронкова, 12",
       "total": 270,
       "worker": {
@@ -412,49 +411,262 @@
       "status": "Завершен"
     },
     {
-      "id": 1,
+      "total": 160,
+      "status": "Завершен",
+      "time": "21-05-2023 13:55",
+      "address": "ул. Воронкова, 12",
       "item": [
         {
-          "name": "Кукис",
-          "price": 130,
+          "name": "Тост с сыром",
+          "price": "160",
           "quantity": 1,
-          "img": "kukis",
-          "type": "Сладкое"
-        },
-        {
-          "name": "Макарон",
-          "price": 140,
-          "quantity": 1,
-          "img": "makaron",
-          "type": "Сладкое"
-        },
-        {
-          "name": "Эспрессо",
-          "price": 140,
-          "quantity": 1,
-          "size": 0.2,
-          "img": "espresso",
-          "type": "Кофе"
+          "size": 0,
+          "img": "tostssyrom",
+          "type": "Сытное"
         }
       ],
       "client": {
         "name": "Ваня",
-        "tel": "+79999999999"
+        "tel": "+79999999990"
       },
-      "time": "23-04-2023 13:15",
-      "address": "ул. Воронкова, 12",
-      "total": 270,
+      "id": 2,
       "worker": {
-        "tel": "+79963868299",
-        "name": "Илья"
+        "name": "Илья",
+        "tel": "+79963868299"
+      }
+    },
+    {
+      "total": 2495,
+      "status": "Готов",
+      "time": "21-05-2023 15:10",
+      "address": "ул. Воронкова, 12",
+      "item": [
+        {
+          "name": "Капучино",
+          "price": "120",
+          "quantity": 1,
+          "size": 0.4,
+          "img": "kapuchino",
+          "type": "Кофе"
+        },
+        {
+          "name": "Латте",
+          "price": 120,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "latte",
+          "type": "Кофе"
+        },
+        {
+          "name": "Эспрессо",
+          "price": 100,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "espresso",
+          "type": "Кофе"
+        },
+        {
+          "name": "Американо",
+          "price": 110,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "amerikano",
+          "type": "Кофе"
+        },
+        {
+          "name": "Флэт-Уайт",
+          "price": 160,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "flet_vayt",
+          "type": "Кофе"
+        },
+        {
+          "name": "Глясе",
+          "price": 170,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "glyase",
+          "type": "Кофе"
+        },
+        {
+          "name": "Мокка",
+          "price": 140,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "mokko",
+          "type": "Кофе"
+        },
+        {
+          "name": "Облепиховый пунш",
+          "price": 165,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "oblepikhovy",
+          "type": "Чай"
+        },
+        {
+          "name": "Новогодний грог",
+          "price": 160,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "grog",
+          "type": "Чай"
+        },
+        {
+          "name": "Эрл Грей",
+          "price": 120,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "bergamot",
+          "type": "Чай"
+        },
+        {
+          "name": "Фисташковое гурме",
+          "price": 200,
+          "quantity": 1,
+          "size": 0,
+          "img": "fistashkgyrme",
+          "type": "Сладкое"
+        },
+        {
+          "name": "Брауни",
+          "price": 150,
+          "quantity": 1,
+          "size": 0,
+          "img": "brauni",
+          "type": "Сладкое"
+        },
+        {
+          "name": "Макарон",
+          "price": 80,
+          "quantity": 1,
+          "size": 0,
+          "img": "makaron",
+          "type": "Сладкое"
+        },
+        {
+          "name": "Кукис",
+          "price": 80,
+          "quantity": 1,
+          "size": 0,
+          "img": "kukis",
+          "type": "Сладкое"
+        },
+        {
+          "name": "Тост с сыром",
+          "price": "160",
+          "quantity": 1,
+          "size": 0,
+          "img": "tostssyrom",
+          "type": "Сытное"
+        },
+        {
+          "name": "Сэндвич с ветчиной",
+          "price": 140,
+          "quantity": 1,
+          "size": 0,
+          "img": "svetchinoyisyrom",
+          "type": "Сытное"
+        },
+        {
+          "name": "Буритто с курицей",
+          "price": 160,
+          "quantity": 1,
+          "size": 0,
+          "img": "buritto",
+          "type": "Сытное"
+        },
+        {
+          "name": "Сырники",
+          "price": 160,
+          "quantity": 1,
+          "size": 0,
+          "img": "syrniki",
+          "type": "Сытное"
+        }
+      ],
+      "client": {
+        "name": "Ваня",
+        "tel": "+79999999990"
       },
-      "status": "Завершен"
+      "id": 3,
+      "worker": {
+        "name": "Илья",
+        "tel": "+79963868299"
+      }
+    },
+    {
+      "total": 470,
+      "status": "Готовим",
+      "time": "21-05-2023 14:55",
+      "address": "ул. Калинина, 83",
+      "item": [
+        {
+          "name": "Американо",
+          "price": 110,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "amerikano",
+          "type": "Кофе"
+        },
+        {
+          "name": "Тарталетка с ягодами",
+          "price": 180,
+          "quantity": 2,
+          "size": 0,
+          "img": "tartaletka",
+          "type": "Сладкое"
+        }
+      ],
+      "client": {
+        "name": "Алексей",
+        "tel": "+79999999991"
+      },
+      "id": 4
+    },
+    {
+      "total": 480,
+      "status": "Готовим",
+      "time": "21-05-2023 16:15",
+      "address": "ул. Калинина, 83",
+      "item": [
+        {
+          "name": "Эрл Грей",
+          "price": 120,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "bergamot",
+          "type": "Чай"
+        },
+        {
+          "name": "Тост с сыром",
+          "price": "160",
+          "quantity": 1,
+          "size": 0,
+          "img": "tostssyrom",
+          "type": "Сытное"
+        },
+        {
+          "name": "Тост с тунцом",
+          "price": 200,
+          "quantity": 1,
+          "size": 0,
+          "img": "toststuntsom",
+          "type": "Сытное"
+        }
+      ],
+      "client": {
+        "name": "Алексей",
+        "tel": "+79999999991"
+      },
+      "id": 5
     },
     {
       "total": 120,
       "status": "Готовим",
-      "time": "07-05-2023 20:05",
-      "address": "ул. Воронкова, 12",
+      "time": "21-05-2023 20:15",
+      "address": "ул. Калинина, 83",
       "item": [
         {
           "name": "Капучино",
@@ -466,51 +678,154 @@
         }
       ],
       "client": {
-        "name": "Ваня",
-        "tel": "+79999999999"
+        "name": "Алексей",
+        "tel": "+79999999991"
       },
-      "id": 2
+      "id": 6
     },
     {
-      "total": 410,
-      "status": "Завершен",
-      "worker": {
-        "tel": "+79963868291",
-        "name": "Иван"
-      },
-      "time": "07-05-2023 20:05",
+      "total": 340,
+      "status": "Готовим",
+      "time": "21-05-2023 18:10",
       "address": "ул. Калинина, 83",
       "item": [
         {
-          "name": "Эспрессо",
-          "price": 100,
+          "name": "Облепиховый пунш",
+          "price": 180,
           "quantity": 1,
           "size": 0.4,
-          "img": "espresso",
+          "img": "oblepikhovy",
+          "type": "Чай"
+        },
+        {
+          "name": "Буритто с курицей",
+          "price": 160,
+          "quantity": 1,
+          "size": 0,
+          "img": "buritto",
+          "type": "Сытное"
+        }
+      ],
+      "client": {
+        "name": "Степан",
+        "tel": "+79999999992"
+      },
+      "id": 7
+    },
+    {
+      "total": 580,
+      "status": "Завершен",
+      "time": "21-05-2023 18:20",
+      "address": "ул. Воронкова, 12",
+      "item": [
+        {
+          "name": "Облепиховый пунш",
+          "price": 180,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "oblepikhovy",
+          "type": "Чай"
+        },
+        {
+          "name": "Макарон",
+          "price": 80,
+          "quantity": 1,
+          "size": 0,
+          "img": "makaron",
+          "type": "Сладкое"
+        },
+        {
+          "name": "Тост с сыром",
+          "price": "160",
+          "quantity": 1,
+          "size": 0,
+          "img": "tostssyrom",
+          "type": "Сытное"
+        },
+        {
+          "name": "Буритто с курицей",
+          "price": 160,
+          "quantity": 1,
+          "size": 0,
+          "img": "buritto",
+          "type": "Сытное"
+        }
+      ],
+      "client": {
+        "name": "Дмитрий",
+        "tel": "+79999999993"
+      },
+      "id": 8,
+      "worker": {
+        "name": "Илья",
+        "tel": "+79963868299"
+      }
+    },
+    {
+      "total": 310,
+      "status": "Готовим",
+      "time": "21-05-2023 16:15",
+      "address": "ул. Театральная, 128",
+      "item": [
+        {
+          "name": "Капучино",
+          "price": 135,
+          "quantity": 1,
+          "size": 0.4,
+          "img": "kapuchino",
           "type": "Кофе"
         },
         {
           "name": "Новогодний грог",
-          "price": 160,
+          "price": 175,
           "quantity": 1,
-          "size": 0.3,
+          "size": 0.4,
           "img": "grog",
           "type": "Чай"
+        }
+      ],
+      "client": {
+        "name": "Дмитрий",
+        "tel": "+79999999993"
+      },
+      "id": 9
+    },
+    {
+      "total": 690,
+      "status": "Готовим",
+      "time": "21-05-2023 19:15",
+      "address": "ул. Театральная, 128",
+      "item": [
+        {
+          "name": "Капучино",
+          "price": 135,
+          "quantity": 2,
+          "size": 0.4,
+          "img": "kapuchino",
+          "type": "Кофе"
+        },
+        {
+          "name": "Капучино",
+          "price": "120",
+          "quantity": 1,
+          "size": 0.2,
+          "img": "kapuchino",
+          "type": "Кофе"
         },
         {
           "name": "Брауни",
           "price": 150,
-          "quantity": 1,
+          "quantity": 2,
           "size": 0,
           "img": "brauni",
           "type": "Сладкое"
         }
       ],
       "client": {
-        "name": "Ваня",
-        "tel": "+79999999999"
+        "name": "Дмитрий",
+        "tel": "+79999999993"
       },
-      "id": 3
+      "id": 10
     }
   ],
   "shops": [
@@ -518,29 +833,23 @@
       "id": 0,
       "address": "ул. Калинина, 83",
       "time": "09:00 - 21:00",
-      "phone": "+7(999)999-99-90"
-    },
-    {
-      "id": 1,
-      "address": "ул. 50 лет Октября, 28",
-      "time": "09:00 - 20:00",
-      "phone": "+7(999)999-99-99"
+      "phone": "+7(999)999-99-91"
     },
     {
       "id": 2,
       "address": "ул. Театральная, 128",
-      "time": "09:00 - 20:00",
+      "time": "09:00 - 21:00",
       "phone": "+7(999)999-99-99"
     },
     {
       "id": 3,
       "address": "ул. Воронкова, 12",
-      "time": "09:00 - 20:00",
+      "time": "09:00 - 21:00",
       "phone": "+7(999)999-99-99"
     },
     {
       "address": "ул. Театральная, 42",
-      "time": "09:00 - 20:00",
+      "time": "09:00 - 21:00",
       "phone": "+7(999)999-99-99",
       "id": 4
     }
@@ -566,54 +875,51 @@
     },
     {
       "name": "Ваня",
-      "tel": "+79999999999",
-      "password": "222222",
+      "tel": "+79999999990",
+      "password": "123123",
       "role": "client",
       "token": "clientToken",
       "id": 2
     },
     {
-      "id": 3,
-      "name": "Илья",
-      "tel": "+79963868290",
-      "password": "111111",
-      "role": "barista",
-      "depart": "ул. Воронкова, 12",
-      "token": "SomeToken1"
-    },
-    {
-      "id": 4,
-      "name": "Иван",
-      "tel": "+79963868291",
-      "password": "111111",
-      "role": "barista",
-      "depart": "ул. Воронкова, 12",
-      "token": "SomeToken1"
-    },
-    {
-      "id": 5,
-      "name": "Александр",
-      "tel": "+79963868292",
-      "password": "111111",
-      "role": "barista",
-      "depart": "ул. Воронкова, 12",
-      "token": "SomeToken1"
-    },
-    {
       "name": "Алексей",
-      "tel": "+79999999999",
-      "password": "123123",
-      "role": "barista",
-      "depart": "ул. Театральная, 128",
-      "token": "SomeToken1",
-      "id": 6
-    },
-    {
-      "name": "Александр",
       "tel": "+79999999991",
       "password": "123123",
       "role": "client",
       "token": "clientToken",
+      "id": 3
+    },
+    {
+      "name": "Степан",
+      "tel": "+79999999992",
+      "password": "123123",
+      "role": "client",
+      "token": "clientToken",
+      "id": 4
+    },
+    {
+      "name": "Дмитрий",
+      "tel": "+79999999993",
+      "password": "123123",
+      "role": "client",
+      "token": "clientToken",
+      "id": 5
+    },
+    {
+      "name": "Александр",
+      "tel": "+79999999994",
+      "password": "123123",
+      "role": "client",
+      "token": "clientToken",
+      "id": 6
+    },
+    {
+      "name": "Иван",
+      "tel": "+79999999123",
+      "password": "123123",
+      "role": "barista",
+      "depart": "ул. Калинина, 83",
+      "token": "SomeToken1",
       "id": 7
     }
   ]

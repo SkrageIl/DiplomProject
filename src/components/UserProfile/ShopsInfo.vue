@@ -1,19 +1,24 @@
 <template>
   <div class="shops">
-    <ShopItem
+    <!-- <ShopItem
       v-for="shopItem in SHOPS" 
         :key="shopItem.id"
-        :shopItem_data="shopItem"/>
+        :shopItem_data="shopItem"/> -->
+      <div class="ya-map">
+        <YaMapComp/>
+      </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import ShopItem from './ShopItem.vue';
+import YaMapComp from '@/components/YaMapComp.vue'
+// import ShopItem from './ShopItem.vue';
 export default {
   name: "ShopsInfo",
   components:{
-    ShopItem
+    // ShopItem
+    YaMapComp
   },
   mounted() {
     this.GET_SHOPS_FROM_DB()
@@ -40,6 +45,12 @@ export default {
   .shops{
     justify-items: center;
     display: grid;
+  }
+}
+@media (max-width: 576px) {
+  .shops{
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

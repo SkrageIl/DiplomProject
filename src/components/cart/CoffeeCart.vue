@@ -14,7 +14,7 @@
         @deleteFromCart="deleteFromCart(index)"
         @addQuantity="addQuantity"
         @subtractQuantity="subtractQuantity"
-        @checkValidItem="checkValidItem"
+        @updateIsValid="onUpdateIsValid"
       />
     </div>
     <OrderPage 
@@ -25,7 +25,7 @@
       <div class="cart__total">
         <span class="cart__label-total">Итого:</span>
         <span class="cart__number-total">{{ CART_TOTAL }} &#8381;</span>
-        <button class="cart__btn-order" :disabled="!isValidAddress || !isValidTime || !checkValidItem" @click="confirmOrder()">Оформить заказ</button>
+        <button class="cart__btn-order" :disabled="!isValidAddress || !this.isValidTime || !this.isValidItem" @click="confirmOrder()">Оформить заказ</button>
       </div>
     </div>
   </div>
@@ -49,7 +49,8 @@ export default {
   data(){ 
     return{
       time: "",
-      isValidTime: false
+      isValidTime: false,
+      isValidItem: true,
     }
   },
   computed: {
@@ -64,11 +65,6 @@ export default {
         return true
       } else return false
     },
-    checkValidItem(isValidItem){
-      if (isValidItem) {
-        return true
-      } else return false
-    }
   },
   methods: {
     ...mapActions([
@@ -80,6 +76,9 @@ export default {
     timeChange(timePick){
       this.isValidTime = timePick.isValidTime
       this.time = timePick.time
+    },
+    onUpdateIsValid(value) {
+      this.isValidItem = value;
     },
     deleteFromCart(index) {
       this.DELETE_FROM_CART(index)
@@ -93,7 +92,13 @@ export default {
     confirmOrder(){
       if (this.isLoggedIn) {
         this.SET_ORDER({address: this.ADDRESS, time: this.time})
-        .then(() => this.$router.push('/'))
+        .then(() =>{
+          this.$notify({
+            title: "Заказ принят",
+            type: "success"
+          })
+          this.$router.push('/profile/orders')
+        })
         .catch(err => console.log(err))
       } else this.$store.dispatch('OPEN_MODAL_LOGIN')
     }
@@ -172,7 +177,8 @@ export default {
   }
   .cart{
     &__total{
-      margin-top: 13%;
+      margin-top: 12%;
+      margin-left: 5%;
     }
     &__label-total{
       padding-right: 13%;

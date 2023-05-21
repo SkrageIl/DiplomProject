@@ -1,6 +1,6 @@
 <template>
   <div class="btn">
-    <button @click="this.CLOSE_MODAL_ADDRESS" class="close-popup-btn">X</button>
+    <button @click="this.CLOSE_MODAL_ADDRESS" class="close-popup-btn" v-if="!this.$route.path.includes('profile')">X</button>
   </div>
   <YandexMap
   :coordinates="coords"
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { YandexMap, YandexMarker } from "vue-yandex-maps";
+import { YandexMap, YandexMarker, loadYmap } from "vue-yandex-maps";
 import getGlobalYandexMapVar from "@/utils.js";
 import {mapGetters, mapActions} from 'vuex'
 import YaMapShop from "./YaMapShop.vue";
@@ -35,7 +35,24 @@ export default {
     YaMapShop
   },
   async mounted() {
-    await getGlobalYandexMapVar();
+    const settings = {
+      apiKey: '30bb15aa-73af-4d6c-a8f2-89c1d2ec8967',
+      lang: 'ru_RU'
+    }
+    this.GET_SHOPS_FROM_DB()
+    await getGlobalYandexMapVar()
+    await loadYmap(settings)
+    const shops = this.SHOPS
+    /* eslint-disable */
+    shops.forEach(shop => {
+      let address = 'г. Благовещенск, ' + shop.address
+      const myGeocoder = ymaps.geocode(address)
+      myGeocoder.then((res) => {
+        let coords = res.geoObjects.get(0).geometry.getCoordinates();
+        this.addCoords({shop: shop, coords: coords})
+      })
+    })
+    /* eslint-enable */
   },
   data() {
     return {
@@ -45,44 +62,27 @@ export default {
         127.541124
       ],
       addresses: [
-        {
-          id: 0,
-          address: "ул. Калинина, 83",
-          coords: [50.271777, 127.522745],
-          time: "09:00 - 21:00",
-          phone: "+7(999)999-99-90"
-        },
-        {
-          id: 1,
-          address: "ул. 50 лет Октября, 28",
-          coords: [50.265363, 127.534971],
-          time: "09:00 - 20:00",
-          phone: "+7(999)999-99-99"
-        },
-        {
-          id: 2,
-          address: "ул. Театральная, 128",
-          coords: [50.273545, 127.553269],
-          time: "09:00 - 20:00",
-          phone: "+7(999)999-99-99"
-        },
-        {
-          id: 3,
-          address: "ул. Воронкова, 12",
-          coords: [50.305745, 127.521218],
-          time: "09:00 - 20:00",
-          phone: "+7(999)999-99-99"
-        },
       ]
     }
   },
   props: {},
   methods: {
     ...mapActions([
-      'CLOSE_MODAL_ADDRESS'
+      'CLOSE_MODAL_ADDRESS',
+      'GET_SHOPS_FROM_DB'
     ]),
     onInit(e) {
       this.mapInstance = e
+    },
+    addCoords(addableShop){
+      let tshop = {
+        id: addableShop.shop.id,
+        address: addableShop.shop.address,
+        coords: addableShop.coords,
+        time: addableShop.shop.time,
+        phone: addableShop.shop.phone
+      }
+      this.addresses.push(tshop)
     }
   },
   computed: {

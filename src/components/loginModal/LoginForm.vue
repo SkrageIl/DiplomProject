@@ -72,13 +72,13 @@ export default {
       .then(() => {
         this.closeModalLogin()
       })
-      .catch(err => console.log(err + password))
+      .catch(err => console.log(err))
       setTimeout(() => {
         if (!this.isLoggedIn){
           this.$notify({
             title: "Неправильно ввели номер телефона или пароль",
             type: "error"
-          });
+          })
         }
       }, 100)
     },

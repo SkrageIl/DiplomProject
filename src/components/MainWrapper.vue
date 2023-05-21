@@ -2,6 +2,7 @@
     <div class="main-wrapper">
         <LoadingPage v-show="isLoading" class="loading"/>
         <CoffeeHeader/>
+        <PWANotification class="pwa" v-if="!isRunningAsPWA"/>
         <router-view v-show="!isLoading"/>
         <vue-final-modal
             v-model="isModalLogin"
@@ -9,7 +10,7 @@
             classes="modal-container"
             content-class="modal-content">
                 <modal-login
-                    ref="closeModalLogin"
+                    ref="modalLogin"
                     @closeModalLogin="closeModalLogin">
                 </modal-login>
         </vue-final-modal>
@@ -35,6 +36,7 @@ import CoffeeHeader from './CoffeeHeader.vue'
 import CoffeeBottomNav from './CoffeeBottomNav.vue'
 import LoadingPage from './LoadingPage.vue'
 import YaMapComp from './YaMapComp.vue'
+import PWANotification from '@/PWANotification.vue'
 
 export default {
     name: 'MainWrapper',
@@ -43,7 +45,8 @@ export default {
         CoffeeBottomNav,
         ModalLogin,
         LoadingPage,
-        YaMapComp
+        YaMapComp,
+        PWANotification
     },
     computed: {
         ...mapState([
@@ -52,7 +55,11 @@ export default {
         ]),
         ...mapGetters([
           'isModalAddress'
-        ])
+        ]),
+        isRunningAsPWA() {
+          // проверяем, запущено ли приложение как PWA на Android и iOS
+          return window.matchMedia('(display-mode: standalone)').matches;
+        }
     },
     methods: {
         ...mapActions([
@@ -71,6 +78,15 @@ export default {
 </script>
 
 <style>
+.pwa{
+    z-index: 10;
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+    min-height: 20%;
+    display: flex;
+    justify-content: center;
+  }
 .ya-map{
     width: 300px;
     height: 400px;

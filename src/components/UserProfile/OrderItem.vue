@@ -165,6 +165,7 @@ export default {
     min-height: 2.5em;
     color: #999999;
     text-align: left;
+    font-size: 0.8rem;
   }
   &__price{
     font-weight: 600;

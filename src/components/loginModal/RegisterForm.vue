@@ -102,6 +102,10 @@ export default {
       }
       this.$store.dispatch('register', data)
       .then(() => {
+        this.$notify({
+            title: "Вы успешно зарегистрированы",
+            type: "success"
+          })
         this.closeModalLogin()
         this.$router.push('/')
       })

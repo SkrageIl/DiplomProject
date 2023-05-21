@@ -6,7 +6,7 @@
     <router-link :to="{name:'catalog'}" class="header__glogo">
       <img src="@/assets/logo.png" alt="logo" class="header__logo">
     </router-link>
-    <button @click="this.logout" v-if:="isLoggedIn" class="header__exit">
+    <button @click="this.exitLogout" v-if:="isLoggedIn" class="header__exit">
       <span class="material-icons login-icon">
         logout
       </span>
@@ -25,7 +25,7 @@
       <div class="header-cart">
         <i class="material-icons shop-icon">shopping_bag</i>
         <span class="cart-items-quantity">{{CART_TOTAL_QUANTITY}}</span>
-    </div>
+      </div>
   </router-link>
   </div>
 </div>
@@ -51,6 +51,11 @@ export default {
       'OPEN_MODAL_LOGIN',
       'OPEN_MODAL_ADDRESS'
     ]),
+    exitLogout(){
+      this.logout().then(() => {
+        this.$router.push('/')
+      })
+    },
     openModal(){
       this.OPEN_MODAL_LOGIN()
     },
@@ -66,7 +71,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .back-popup-btn{
   position: fixed;
   top: 0.7em;
@@ -81,7 +85,7 @@ export default {
   position: fixed;
   left: 0;
   width: 100%;
-  height: 5em;
+  height: 4em;
   margin-top: 0;
   background-color: #3a3939;
   border-bottom-left-radius: 25px;
@@ -94,7 +98,7 @@ export default {
   }
   &__logo{
     width: auto;
-    height: 3.2em;
+    height: 2.2em;
   }
   &__logo-title{
     width: 6em;
@@ -103,7 +107,7 @@ export default {
   &__login{
     position: fixed;
     right: 2em;
-    top: 2em;
+    top: 1.6em;
     border: 0;
     background-color: transparent;
     color: white;
@@ -111,7 +115,7 @@ export default {
   &__exit{
     position: fixed;
     right: 2em;
-    top: 2em;
+    top: 1.6em;
     border: 0;
     background-color: transparent;
     color: white;
@@ -127,7 +131,7 @@ export default {
     font-weight: 700;
     left: 0;
     margin-left: 15px;
-    margin-top: 8em;
+    margin-top: 7em;
     top: 0;
     font-size: 15px;
     background-color: #ffffff75;
@@ -143,7 +147,7 @@ export default {
   color: white;
   position: fixed;
   right: 20%;
-  top: 1.7em;
+  top: 1.4em;
 }
 .face-icon{
   font-size: 30px;
@@ -165,7 +169,7 @@ export default {
   .header-cart{
     position: fixed;
     right: 15%;
-    top: 1.7em;
+    top: 1.4em;
     color: white;
   }
   .shop-icon{
@@ -189,7 +193,7 @@ export default {
 @media(min-width: 576px) and (max-width: 800px){
   .coffee-header{
     &__address{
-      margin-top: 7em;
+      margin-top: 6.5em;
     }
   }
 }

@@ -38,9 +38,9 @@ img{
 .loading-logo{
   padding-top: 70%;
 }
-@media(min-width: 800px){
+@media(min-width: 576px) and (max-width: 1024px){
   .loading-logo{
-    padding-top: 60%;
+    padding-top: 12em;
   }
 }
 @media(min-width: 1024px){

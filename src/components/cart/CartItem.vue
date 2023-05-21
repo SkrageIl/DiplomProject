@@ -5,7 +5,11 @@
         <img :src="require(`@/assets/catalog/${cart_item_data.image}.png`)" class="cart-item__img">
       </span>
       <div class="cart-item__center">
-        <span class="cart-item__name">{{ cart_item_data.name }}</span>
+        <span class="cart-item__name">{{ cart_item_data.name }}
+          <span v-if="cart_item_data.type == 'Чай' || cart_item_data.type == 'Кофе'">
+            ({{ cart_item_data.size }}л)
+          </span>
+        </span>
         <span class="cart-item__price">{{ cart_item_data.price * cart_item_data.quantity }} &#8381;</span>
       </div>
   </div>
@@ -32,7 +36,8 @@ export default {
         coffee: this.cart_item_data.type == 'Кофе',
         sweet: this.cart_item_data.type == 'Сладкое',
         meal: this.cart_item_data.type == 'Сытное'
-      }
+      },
+      isValid: true,
     }
   },
   props: {
@@ -43,26 +48,38 @@ export default {
       }
     }
   },
+  watch: {
+    isValid(){
+      this.$emit('updateIsValid', this.isValid)
+    }
+  },
   computed: {
     ...mapGetters([
       'ADDRESS'
     ]),
     isValidItem(){
       if (this.cart_item_data.coffeeshops.includes(this.ADDRESS)) {
-        this.$emit('checkValidItem', true)
+        this.updateValidItem(true)
         return true
       } else {
-        this.$emit('checkValidItem', false)
+        this.updateValidItem(false)
         return false
       }
     }
   },
   methods: {
     subtractQuantity(){
+      if (this.cart_item_data.quantity == 1) {
+        console.log(true)
+        this.$emit('updateIsValid', true)
+      }
       this.$emit('subtractQuantity', this.cart_item_data)
     },
     addQuantity(){
       this.$emit('addQuantity', this.cart_item_data)
+    },
+    updateValidItem(isValid){
+      this.isValid = isValid
     }
   }
 }

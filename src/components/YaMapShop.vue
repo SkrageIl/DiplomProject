@@ -56,6 +56,10 @@ export default {
     ]),
     setAddress(){
       this.SET_ADDRESS(this.map_shop_data.address)
+      this.$notify({
+            title: "Адрес выбран",
+            type: "success"
+          })
       this.CLOSE_MODAL_ADDRESS()
     }
   },
@@ -136,6 +140,14 @@ i{
       color: #f5f5f5;
       font-weight: 600;
       cursor: pointer;
+      transition-duration: 0.4s;
+    }
+    button:hover {
+      background-color: #ea1400;
+      color: white;
+    }
+    button:active {
+      transform: translateY(2px);
     }
   }
 }

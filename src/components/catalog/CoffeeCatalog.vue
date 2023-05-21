@@ -39,7 +39,7 @@ export default {
   overflow: hidden;
   padding: 1.25em 0;
   position: fixed;
-  top: 4em;
+  top: 3em;
   width: 100%;
 }
 @media(max-width: 576px){

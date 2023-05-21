@@ -13,7 +13,7 @@
     </div>
     <div class="footer">
       <div class="item__price">
-        <span class="item__price__value">{{ product_data.price }}</span>
+        <span class="item__price__value">{{ this.currentPrice }}</span>
         <span class="item__price__currency">&#8381;</span>
       </div>
       <div class="item__quantity" v-if="quantityInfo > 0">
@@ -45,7 +45,7 @@
         <p class="item__title modal-item__title">{{ product_data.title }}</p>
       <div class="footer modal-footer">
         <div class="item__price">
-          <span class="item__price__value">{{ product_data.price }}</span>
+          <span class="item__price__value">{{ this.currentPrice }}</span>
           <span class="item__price__currency">&#8381;</span>
         </div>
         <div class="item__quantity" v-if="quantityInfo > 0">
@@ -75,7 +75,7 @@
         <p class="item__title modal-item__title">{{ product_data.title }}</p>
       <div class="footer modal-footer swipe-modal-footer">
         <div class="item__price swipe-modal__price">
-          <span class="item__price__value">{{ product_data.price }}</span>
+          <span class="item__price__value">{{ this.currentPrice }}</span>
           <span class="item__price__currency">&#8381;</span>
         </div>
         <div class="item__quantity swipe-modal__quantity" v-if="quantityInfo > 0">
@@ -100,11 +100,15 @@ export default {
   components:{
     swipeModal
   },
+  mounted() {
+    this.currentPrice = this.product_data.price
+  },
   data() {
     return {
       isMobileItemModal: ref(false),
       isItemModal: ref(false),
       size: 0,
+      currentPrice: 0,
       classes: {
         tea: this.product_data.type == 'Чай',
         coffee: this.product_data.type == 'Кофе',
@@ -118,6 +122,17 @@ export default {
       type: Object,
       default() {
         return {};
+      }
+    }
+  },
+  watch: {
+    size(){
+      if (this.size == 0.3) {
+        this.currentPrice = parseInt(this.product_data.price) + 10
+      } else if (this.size == 0.4) {
+        this.currentPrice = parseInt(this.product_data.price) + 15
+      } else{
+        this.currentPrice = this.product_data.price
       }
     }
   },
@@ -145,9 +160,9 @@ export default {
       let product = {
         product_data: this.product_data,
         size: this.size,
+        price: this.currentPrice,
         quantity: this.quantityInfo
       }
-      console.log(product + "        " + product.size)
       this.ADD_TO_CART(product)
     },
     subtractQuantity() {
@@ -182,7 +197,6 @@ export default {
       if (product.size == selectedSize) {
         let quantity = this.FIND_CART_ITEM_QUANTITY_BY_ARTICLE(product)
         this.size = 0
-        console.log("Совпадает" + product)
         for (let index = 0; index < quantity; index++) {
           this.SUBTRACT_QUANTITY(product)          
         }
