@@ -1,23 +1,17 @@
 <template>
   <div class="shops">
-    <!-- <ShopItem
-      v-for="shopItem in SHOPS" 
-        :key="shopItem.id"
-        :shopItem_data="shopItem"/> -->
-      <div class="ya-map">
-        <YaMapComp/>
-      </div>
+    <div class="ya-map">
+      <YaMapComp/>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import YaMapComp from '@/components/YaMapComp.vue'
-// import ShopItem from './ShopItem.vue';
 export default {
   name: "ShopsInfo",
   components:{
-    // ShopItem
     YaMapComp
   },
   mounted() {
