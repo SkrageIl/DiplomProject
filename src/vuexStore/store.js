@@ -78,7 +78,6 @@ let store = createStore({
         ADD_QUANTITY_CART_ITEM: (state, product) => {
             state.cart.forEach(function(item) {
                 if (item.article == product.article && item.size == product.size) {
-                    console.log(item.article + " артикль слева айтем справа продукт " + product.article + "  s  " + item.size + "  " + product.size)
                     item.quantity++
                 }
             })
@@ -276,13 +275,8 @@ let store = createStore({
             order.address = feature.address
             order.item = items
             order.client = client
+
             commit('SET_ORDER_TO_STATE', order)
-
-            //НЕ РАБОТАЕТ выводит null
-            // var userOrders = JSON.parse(localStorage.getItem('usersOrders') || '[]');
-            // userOrders.push(order.item);
-            // localStorage.setItem('userOrders', JSON.stringify(userOrders));
-
             commit('CLEAR_ORDER')
             commit('CLEAR_CART')
 
